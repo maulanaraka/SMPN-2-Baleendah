@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('siswa_ekstrakurikuler', function (Blueprint $table) {
             $table->string('SiswasiswaID', 50);
             $table->unsignedInteger('EkstrakurikulerekstrakurikulerID');
+            
             $table->integer('nilai')->nullable();
             $table->string('keterangan', 255)->nullable();
             $table->integer('semester')->nullable();

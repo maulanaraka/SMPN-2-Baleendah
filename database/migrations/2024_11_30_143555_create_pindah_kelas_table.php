@@ -15,6 +15,7 @@ return new class extends Migration
             $table->increments('pindahKelasID');
             $table->string('Siswa_KelasSiswasiswaID', 50);
             $table->unsignedInteger('Siswa_KelasKelaskelasID', 10);
+            
             $table->integer('kelasIDAwal', 10);
             $table->integer('kelasIDAkhir', 10);
             $table->timestamps();

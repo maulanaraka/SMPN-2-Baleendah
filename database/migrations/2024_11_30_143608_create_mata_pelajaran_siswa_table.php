@@ -12,8 +12,29 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('mata_pelajaran_siswa', function (Blueprint $table) {
-            $table->id();
+            $table->string('SiswasiswaID', 50);
+            $table->unsignedInteger('MataPelajaranmataPelajaranID');
+
+            $table->integer('nilaiPengetahuan', 10);
+            $table->string('predikatPengetahuan', 5);
+            $table->string('deskripsiPengetahuan', 255);
+            
+            $table->integer('nilaiKeterampilan', 10);
+            $table->string('predikatKeterampilan', 5);
+            $table->string('deskripsiKeterampilan', 255);
+            
+            $table->integer('semester', 10);
             $table->timestamps();
+        
+            // foreign key
+            $table  ->foreign('SiswasiswaID')
+                    ->references('siswaID')
+                    ->on('siswa')
+                    ->onDelete('cascade');
+            $table  ->foreign('MataPelajaranmataPelajaranID')
+                    ->references('mataPelajaranID')
+                    ->on('mata_pelajaran')
+                    ->onDelete('cascade');
         });
     }
 

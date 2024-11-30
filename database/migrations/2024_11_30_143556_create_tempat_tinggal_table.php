@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('tempat_tinggal', function (Blueprint $table) {
             $table->increments('tempatTinggalID');
             $table->string('SiswasiswaID', 50); 
+            
             $table->string('jalan', 100);
             $table->string('kodePos', 100);
             $table->string('provinsi', 100);

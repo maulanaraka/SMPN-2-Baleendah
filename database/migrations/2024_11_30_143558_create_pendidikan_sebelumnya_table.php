@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('pendidikan_sebelumnya', function (Blueprint $table) {
             $table->increments('sekolahDasarID');
+            $table->string('SiswasiswaID', 50); 
+            
             $table->string('namaSD', 100); 
-            $table->date('alamatSekolah', 255)->nullable();
-            $table->string('melanjutkanSekolahKe', 255)->nullable();
-            $table->string('alamatSekolah', 255)->nullable();
+            $table->string('alamatSekolah', 255);
+            $table->date('tanggalIjazah');
+            $table->string('noIjazah', 50);
             $table->timestamps();
 
             // foreign key

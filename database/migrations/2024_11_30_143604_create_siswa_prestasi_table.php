@@ -12,8 +12,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('siswa_prestasi', function (Blueprint $table) {
-            $table->id();
+            $table->string('SiswasiswaID', 50);
+            $table->unsignedInteger('PrestasiprestasiID');
             $table->timestamps();
+        
+            // foreign key
+            $table  ->foreign('SiswasiswaID')
+                    ->references('siswaID')
+                    ->on('siswa')
+                    ->onDelete('cascade');
+            $table  ->foreign('PrestasiprestasiID')
+                    ->references('prestasiID')
+                    ->on('prestasi')
+                    ->onDelete('cascade');
         });
     }
 

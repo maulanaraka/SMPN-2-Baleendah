@@ -12,8 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('prestasi', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->increments('prestasiID');
+            $table->string('bidang', 255); 
+            $table->date('tanggal'); 
+            $table->string('keteranganPrestasi', 255);
         });
     }
 

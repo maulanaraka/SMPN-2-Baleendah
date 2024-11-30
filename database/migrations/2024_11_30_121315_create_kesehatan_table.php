@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('kesehatan', function (Blueprint $table) {
             $table->increments('kesehatanID');
             $table->string('SiswasiswaID', 50);
+            
             $table->float('beratDiterima');
             $table->float('tinggiDiterima');
             $table->float('beratLulus')->nullable();

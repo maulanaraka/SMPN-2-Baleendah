@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('siswa_lulus', function (Blueprint $table) {
             $table->increments('lulusID');
+            $table->string('SiswasiswaID', 50); 
+            
             $table->string('noIjazah', 50)->nullable(); 
-            $table->date('tanggal', 100)->nullable();
+            $table->date('tanggal')->nullable();
             $table->string('melanjutkanSekolahKe', 255)->nullable();
             $table->string('alamatSekolah', 255)->nullable();
             $table->timestamps();

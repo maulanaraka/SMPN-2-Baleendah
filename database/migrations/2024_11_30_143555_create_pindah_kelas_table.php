@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('pindah_kelas', function (Blueprint $table) {
             $table->increments('pindahKelasID');
             $table->string('Siswa_KelasSiswasiswaID', 50);
-            $table->unsignedInteger('Siswa_KelasKelaskelasID', 10);
-            
-            $table->integer('kelasIDAwal', 10);
-            $table->integer('kelasIDAkhir', 10);
+            $table->unsignedInteger('Siswa_KelasKelaskelasID');
+
+            $table->integer('kelasIDAwal');
+            $table->integer('kelasIDAkhir');
             $table->timestamps();
 
             // foreign key

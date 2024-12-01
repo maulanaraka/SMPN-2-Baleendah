@@ -15,8 +15,8 @@ return new class extends Migration
             $table->increments('mataPelajaranID');
             $table->string('mataPelajaran', 255);
             $table->string('DeskripsiMataPelajaran', 255);
-            $table->integer('KKMPengetahuan', 10);
-            $table->integer('KKMKeterampilan', 10);
+            $table->integer('KKMPengetahuan');
+            $table->integer('KKMKeterampilan');
             $table->timestamps();
         });
     }

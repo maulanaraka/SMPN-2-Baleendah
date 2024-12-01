@@ -15,15 +15,15 @@ return new class extends Migration
             $table->string('SiswasiswaID', 50);
             $table->unsignedInteger('MataPelajaranmataPelajaranID');
 
-            $table->integer('nilaiPengetahuan', 10);
+            $table->float('nilaiPengetahuan');
             $table->string('predikatPengetahuan', 5);
             $table->string('deskripsiPengetahuan', 255);
             
-            $table->integer('nilaiKeterampilan', 10);
+            $table->float('nilaiKeterampilan');
             $table->string('predikatKeterampilan', 5);
             $table->string('deskripsiKeterampilan', 255);
             
-            $table->integer('semester', 10);
+            $table->integer('semester');
             $table->timestamps();
         
             // foreign key

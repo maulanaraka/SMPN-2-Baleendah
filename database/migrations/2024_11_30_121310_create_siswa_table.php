@@ -21,10 +21,10 @@ return new class extends Migration
             $table->date('tanggalLahir');
             $table->string('agama', 50);
             $table->string('kewarganegaraan', 50);
-            $table->integer('anakKe', 50);
-            $table->integer('saudaraKandung', 5);
-            $table->integer('saudaraTiri', 5);
-            $table->integer('saudaraAngkat', 5);
+            $table->integer('anakKe');
+            $table->integer('saudaraKandung');
+            $table->integer('saudaraTiri');
+            $table->integer('saudaraAngkat');
             $table->string('yatimPiatu', 10);
             $table->string('bahasaDirumah', 20);
             $table->timestamps();

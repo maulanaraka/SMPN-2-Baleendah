@@ -16,15 +16,15 @@ return new class extends Migration
             $table->string('SiswasiswaID', 50);
 
             $table->string('kelas', 10); 
-            $table->integer('semester', 10); 
-            $table->integer('jumlahHadir', 10);
-            $table->float('presentaseHadir', 10);
-            $table->integer('sakit', 10);
-            $table->integer('izin', 10);
-            $table->integer('alpa', 10);
-            $table->integer('jumlahTidakHadir', 10);
-            $table->float('presentaseTidakHadir', 10);
-            $table->integer('jumlahHariBelajarEfektif', 10);
+            $table->integer('semester'); 
+            $table->integer('jumlahHadir');
+            $table->float('presentaseHadir');
+            $table->integer('sakit');
+            $table->integer('izin');
+            $table->integer('alpa');
+            $table->integer('jumlahTidakHadir');
+            $table->float('presentaseTidakHadir');
+            $table->integer('jumlahHariBelajarEfektif');
 
             // foreign key
             $table  ->foreign('SiswasiswaID')

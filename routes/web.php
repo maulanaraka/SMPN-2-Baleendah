@@ -5,19 +5,19 @@ use App\Http\Controllers\SessionController;
 use App\Http\Middleware\UserAccess;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('dashboard');
+});
 
 // Authentication Middleware
 Route::middleware(['guest'])->group(function(){
-    Route::get('/', [SessionController::class,'index'])->name('login');
-    Route::post('/', [SessionController::class,'login']);
+    Route::get('/login', [SessionController::class,'index'])->name('login');
+    Route::post('/login', [SessionController::class,'login']);
 });
 
-Route::get('/home',function(){
-    return redirect('/operator');
-});
+// Route::get('/home',function(){
+//     return redirect('/operator');
+// });
 
 // Operator Routing
 Route::middleware(['auth'])->group(function () {

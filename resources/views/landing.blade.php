@@ -1,4 +1,7 @@
 @extends('layouts.app')
+
+@section('Buku Induk Siswa', 'Landing Page') <!-- Optional: Set the title for this page -->
+
 @section('content')
 <body class="bg-gray-50">
 
@@ -52,14 +55,14 @@
         <div class="max-w-7xl mx-auto text-center">
             <h2 class="text-4xl font-semibold mb-8">Get in Touch</h2>
             <p class="text-xl mb-8">Have questions? Feel free to reach out to us!</p>
-            <a href="mailto:contact@yourbrand.com" class="bg-white hover:bg-gray-100 text-blue-600 py-2 px-6 rounded-lg text-xl">Contact Us</a>
+            <a href="mailto:contact@benzena.com" class="bg-white hover:bg-gray-100 text-blue-600 py-2 px-6 rounded-lg text-xl">Contact Us</a>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-6">
         <div class="max-w-7xl mx-auto text-center">
-            <p>&copy; 2024 YourBrand. All rights reserved.</p>
+            <p>&copy; 2024 Benzena. All rights reserved.</p>
         </div>
     </footer>
 

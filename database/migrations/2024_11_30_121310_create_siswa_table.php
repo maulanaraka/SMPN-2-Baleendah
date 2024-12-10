@@ -20,12 +20,12 @@ return new class extends Migration
             $table->string('tempatLahir', 50);
             $table->date('tanggalLahir');
             $table->string('agama', 50);
-            $table->string('kewarganegaraan', 50);
+            $table->string('kewarganegaraan', 100);
             $table->integer('anakKe');
             $table->integer('saudaraKandung');
             $table->integer('saudaraTiri');
             $table->integer('saudaraAngkat');
-            $table->string('yatimPiatu', 10);
+            $table->string('yatimPiatu', 50);
             $table->string('bahasaDirumah', 20);
             $table->timestamps();
         });

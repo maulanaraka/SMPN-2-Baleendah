@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Login Page')
 @section('content')
 <div class="container mx-auto py-10">
     <div class="max-w-md mx-auto bg-white shadow-md rounded-lg p-6">
@@ -31,3 +32,4 @@
     </div>
 </div>
 @endsection
+

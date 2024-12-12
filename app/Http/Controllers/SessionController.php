@@ -2,47 +2,51 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class SessionController extends Controller
 {
-    function index()
+    // Show the login form
+    public function showLoginForm()
     {
-        return view('/auth/login');
+        return view('auth.login');
     }
 
-    function login(Request $request){
+    // Handle login process
+    public function login(Request $request)
+    {
         $request->validate([
-            'username'=>'required',
-            'password'=>'required'
-        ],[
-            'username.required' => 'Username can\'t be empty', 
-            'password.required' => 'Password can\'t be empty',
+            'username' => 'required|string',
+            'password' => 'required|string',
         ]);
 
-        $infologin = [
-            'username'=>$request->username,
-            'password'=>$request->password,
-        ];
-
-        if(Auth::attempt($infologin)){
-            if(Auth::user()->role == 'admin'){
-                return redirect('admin');
-            } elseif(Auth::user()->role == 'operator'){
-                return redirect('operator');
-            } elseif(Auth::user()->role == 'staff'){
-                return redirect('staff');
-            }
-        }else{
-            return redirect('')->withErrors('Wrong username and password')->withInput();
+        if (Auth::attempt($request->only('username', 'password'))) {
+            $user = Auth::user();
+            return redirect()->route($this->redirectToRole($user->role));
         }
+
+        return back()->withErrors(['username' => 'Invalid credentials.']);
     }
 
-    function logout(){
+    // Handle logout process
+    public function logout()
+    {
         Auth::logout();
         return redirect('/');
     }
-    
+
+    // Redirect users based on role
+    private function redirectToRole($role)
+    {
+        switch ($role) {
+            case 'admin': return 'admin';
+            case 'operator': return 'operator';
+            case 'staff': return 'staff';
+            default: return '/';
+        }
+    }
 }
+

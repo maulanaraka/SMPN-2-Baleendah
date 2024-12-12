@@ -31,4 +31,10 @@ class Siswa extends Model
         'yatimPiatu',
         'bahasaDirumah',
     ];
+
+    public function kesehatan()
+    {
+        return $this->hasOne(Kesehatan::class, 'SiswasiswaID', 'siswaID');
+    }
+
 }

@@ -6,6 +6,7 @@
         <a href="{{ route('staff') }}" class="block px-4 py-2 text-[#111928] text-base font-medium rounded">Dashboard</a>
         <a href="{{ route('data-siswa') }}" class="block px-4 py-2 text-[#111928] text-base font-medium rounded">Data Siswa</a>
         <a href="#{{-- route('siswa.input') --}}" class="block px-4 py-2 text-[#111928] text-base font-medium rounded">Input Data Siswa</a>
+        <a href="#{{-- route('siswa.input') --}}" class="block px-4 py-2 text-[#111928] text-base font-medium rounded">Backup Data</a>
     </nav>
     <!-- Logout Form -->
     <div class="absolute bottom-0 left-0 w-full p-4">

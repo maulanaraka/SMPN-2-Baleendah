@@ -23,7 +23,7 @@ class SiswaController extends Controller
         if ($request->filled('search')) {
             $search = $request->input('search');
             $query->where('NISN', 'like', "%{$search}%")
-                  ->orWhere('namaLengkap', 'like', "%{$search}%");
+                ->orWhere('namaLengkap', 'like', "%{$search}%");
         }
 
         $siswa = $query->paginate(10);

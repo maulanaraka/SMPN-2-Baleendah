@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
         // $middleware->append(\App\Http\Middleware\UserAccess::class);
         $middleware->alias([
             'UserAccess' => \App\Http\Middleware\UserAccess::class,
+            'role' => \App\Http\Middleware\RoleMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

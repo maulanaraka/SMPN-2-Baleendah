@@ -13,44 +13,68 @@ class SiswaController extends Controller
     public function index()
     {
         $siswa = Siswa::all();
-        return view('data-siswa.index', compact('siswa'));
+        return view('siswa.index', compact('siswa'));
     }
 
     public function dataSiswa(Request $request)
     {
-        // Start building the query
         $query = Siswa::query();
-        
-        // If search is filled, filter results based on search term
+
         if ($request->filled('search')) {
             $search = $request->input('search');
             $query->where('NISN', 'like', "%{$search}%")
-                ->orWhere('namaLengkap', 'like', "%{$search}%");
+                  ->orWhere('namaLengkap', 'like', "%{$search}%");
         }
-        
-        // Paginate the results, 10 per page
+
         $siswa = $query->paginate(10);
-        
-        // Return the view with the paginated siswa data
-        return view('data-siswa.index', compact('siswa'));
+
+        return view('siswa.index', compact('siswa')); // Adjust view path
+    }
+
+    public function show($siswaID)
+    {
+        $siswa = Siswa::findOrFail($siswaID);
+        return view('siswa.show', compact('siswa')); // Adjust view path
     }
 
     public function edit($siswaID)
     {
-        // Find siswa by ID or fail if not found
         $siswa = Siswa::findOrFail($siswaID);
-        return view('siswa.edit', compact('siswa'));
+        return view('siswa.edit.siswa', compact('siswa')); // Adjust view path
+    }
+
+    public function update(Request $request, $id)
+    {
+        $siswa = Siswa::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'NISN' => 'required|string',
+            'namaLengkap' => 'required|string',
+            'namaPanggilan' => 'nullable|string',
+            'jenisKelamin' => 'required|string',
+            'tempatLahir' => 'required|string',
+            'tanggalLahir' => 'required|date',
+            'agama' => 'required|string',
+            'kewarganegaraan' => 'required|string',
+            'anakKe' => 'nullable|integer',
+            'saudaraKandung' => 'nullable|integer',
+            'saudaraTiri' => 'nullable|integer',
+            'saudaraAngkat' => 'nullable|integer',
+            'yatimPiatu' => 'required|string',
+            'bahasaDirumah' => 'nullable|string',
+        ]);
+
+        $siswa->update($validatedData);
+
+        return back()->with('success', 'Data berhasil diperbarui!');
     }
 
     public function destroy($siswaID)
     {
-        // Find siswa by ID or fail if not found
         $siswa = Siswa::findOrFail($siswaID);
-        
-        // Delete the siswa record
         $siswa->delete();
-        
-        // Redirect back to the siswa list with a success message
+
         return redirect()->route('data-siswa')->with('success', 'Siswa berhasil dihapus.');
     }
 }
+

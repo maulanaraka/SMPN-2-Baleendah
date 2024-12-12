@@ -10,15 +10,15 @@
         <div class="mt-8 flex flex-wrap gap-6">
             <div class="bg-white rounded-lg shadow-lg p-6 flex-grow">
                 <span class="text-black text-[32px]">Total Siswa</span><br/>
-                <span class="text-[#a3b86a] text-[32px] font-semibold">{{--{{ $totalSiswa }}--}}</span>
+                <span class="text-[#a3b86a] text-[32px] font-semibold">{{ $totalSiswa }}</span>
             </div>
             <div class="bg-white rounded-lg shadow-lg p-6 flex-grow">
                 <span class="text-black text-[32px]">Siswa Laki-laki</span><br/>
-                <span class="text-[#1a56db] text-[32px] font-semibold">{{--{{ $siswaLakiLaki }}--}}</span>
+                <span class="text-[#1a56db] text-[32px] font-semibold">{{ $siswaLakiLaki }}</span>
             </div>
             <div class="bg-white rounded-lg shadow-lg p-6 flex-grow">
                 <span class="text-black text-[32px]">Siswi Perempuan</span><br/>
-                <span class="text-[#ff51c8] text-[32px] font-semibold">{{--{{ $siswiPerempuan }}--}}</span>
+                <span class="text-[#ff51c8] text-[32px] font-semibold">{{ $siswiPerempuan }}</span>
             </div>
         </div>
         <div class="bg-white rounded-lg shadow-lg p-6 mt-8">

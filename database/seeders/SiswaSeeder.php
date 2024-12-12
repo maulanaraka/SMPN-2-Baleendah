@@ -25,24 +25,24 @@ class SiswaSeeder extends Seeder
             $randomNumber = $faker->numberBetween(1000000, 9999999);
 
             // Combine to form the NISN (siswaID)
-            $siswaID = $yearLast3Digits . $randomNumber;
+            $NISN = $yearLast3Digits . $randomNumber;
 
             DB::table('siswa')->insert([
-                'siswaID' => $siswaID,
-                'NISN' => $faker->unique()->numberBetween(1000000000, 9999999999),
+                'siswaID' => $faker->unique()->numberBetween(1000000000, 9999999999),
+                'NISN' => $NISN,
                 'namaLengkap' => $faker->name,
                 'namaPanggilan' => $faker->firstName,
                 'jenisKelamin' => $faker->randomElement(['Laki-laki', 'Perempuan']),
                 'tempatLahir' => $faker->city,
                 'tanggalLahir' => $tanggalLahir,
-                'agama' => $faker->randomElement(['Islam', 'Kristen', 'Katholik', 'Hindu', 'Buddha', 'Konghucu']),
+                'agama' => $faker->randomElement(['Islam', 'Kristen', 'Katholik', 'Hindu', 'Buddha', 'Konghucu', 'Kejawen']),
                 'kewarganegaraan' => $faker->country,
                 'anakKe' => $faker->numberBetween(1, 5),
                 'saudaraKandung' => $faker->numberBetween(0, 10),
                 'saudaraTiri' => $faker->numberBetween(0, 5),
                 'saudaraAngkat' => $faker->numberBetween(0, 5),
                 'yatimPiatu' => $faker->randomElement(['Yatim', 'Piatu', 'Yatim Piatu', 'Tidak']),
-                'bahasaDirumah' => $faker->randomElement(['Indonesia', 'Jawa', 'Sunda', 'Batak', 'Madura']),
+                'bahasaDirumah' => $faker->randomElement(['Indonesia', 'Jawa', 'Sunda', 'Batak', 'Madura', 'Kucing', 'Nyamnyam']),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

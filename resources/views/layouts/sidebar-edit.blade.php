@@ -13,8 +13,14 @@
 
     <nav class="mt-6 px-3 space-y-4">
         <!-- Edit links for specific data models -->
-        <a href="{{ route('siswa.edit', $siswa->siswaID) }}" class="block px-4 py-2 text-[#111928] text-base font-medium rounded">Data Siswa</a>
-        <a href="#{{-- route('kesehatan.edit', $kesehatan->siswaID) --}}" class="block px-4 py-2 text-[#111928] text-base font-medium rounded">Kesehatan</a>
+        <a href="{{ route('siswa.edit', $siswa->siswaID) }}" 
+            class="block px-4 py-2 text-[#111928] text-base font-medium rounded">
+            Data Siswa
+        </a>
+        <a href="{{ route('kesehatan.edit', $siswa->siswaID) }}" 
+            class="block px-4 py-2 text-[#111928] text-base font-medium rounded">
+            Kesehatan
+        </a>
         <a href="#{{-- route('kelas.edit', $kelas->siswaID) --}}" class="block px-4 py-2 text-[#111928] text-base font-medium rounded">Kelas</a>
         <!-- Add more edit links as needed -->
     </nav>

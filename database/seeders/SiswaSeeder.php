@@ -16,7 +16,7 @@ class SiswaSeeder extends Seeder
         $faker = Faker::create();
 
         for ($i = 0; $i < 50; $i++) {
-            $tanggalLahir = $faker->date('Y-m-d');  // Generate a date as a string
+            $tanggalLahir = $faker->date('Y-m-d');
 
             // Extract the last 3 digits of the year
             $yearLast3Digits = substr(date('Y', strtotime($tanggalLahir)), -3);
@@ -35,14 +35,14 @@ class SiswaSeeder extends Seeder
                 'jenisKelamin' => $faker->randomElement(['Laki-laki', 'Perempuan']),
                 'tempatLahir' => $faker->city,
                 'tanggalLahir' => $tanggalLahir,
-                'agama' => $faker->randomElement(['Islam', 'Kristen', 'Katholik', 'Hindu', 'Buddha', 'Konghucu', 'Kejawen']),
+                'agama' => $faker->randomElement(['Islam', 'Kristen', 'Katholik', 'Hindu', 'Kertas Minyak', 'Batu Ginjal', 'Kejawen']),
                 'kewarganegaraan' => $faker->country,
                 'anakKe' => $faker->numberBetween(1, 5),
                 'saudaraKandung' => $faker->numberBetween(0, 10),
                 'saudaraTiri' => $faker->numberBetween(0, 5),
                 'saudaraAngkat' => $faker->numberBetween(0, 5),
                 'yatimPiatu' => $faker->randomElement(['Yatim', 'Piatu', 'Yatim Piatu', 'Tidak']),
-                'bahasaDirumah' => $faker->randomElement(['Indonesia', 'Jawa', 'Sunda', 'Batak', 'Madura', 'Kucing', 'Nyamnyam']),
+                'bahasaDirumah' => $faker->randomElement(['Indonesia', 'Jawa', 'Sunda', 'Rock Bottom,', 'Madura', 'Kucing', 'Nyamnyam']),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

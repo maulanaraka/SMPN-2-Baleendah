@@ -3,6 +3,7 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\KesehatanController;
 use App\Http\Middleware\UserAccess;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -32,16 +33,20 @@ Route::middleware(['auth', 'role:operator'])->group(function () {
 
 Route::middleware(['auth', 'role:staff'])->group(function () {
     Route::get('/staff', [UserController::class, 'staff'])->name('staff');
+
+    // Siswa
     Route::get('/siswa/{siswaID}/edit', [SiswaController::class, 'edit'])->name('siswa.edit');
     Route::put('/siswa/{siswaID}', [SiswaController::class, 'update'])->name('siswa.update');
     Route::delete('/siswa/{siswaID}', [SiswaController::class, 'destroy'])->name('siswa.destroy');
-
     Route::get('/data-siswa', [SiswaController::class, 'dataSiswa'])->name('data-siswa');
     Route::get('/siswa/{siswaID}/show', [SiswaController::class, 'show'])->name('siswa.show');
+
+    // Kesehatan
+    Route::get('/kesehatan/input', [KesehatanController::class, 'create'])->name('kesehatan.create');
+    Route::post('/kesehatan', [KesehatanController::class, 'store'])->name('kesehatan.store');
+    Route::get('/kesehatan/{kesehatanID}/edit', [KesehatanController::class, 'edit'])->name('kesehatan.edit');
+    Route::put('/kesehatan/{kesehatanID}', [KesehatanController::class, 'update'])->name('kesehatan.update');
 });
 
-
-// Data Siswa Page (Require Authentication)
-// Route::middleware(['auth'])->get('/data-siswa', [SiswaController::class, 'dataSiswa'])->name('data-siswa');
 
 

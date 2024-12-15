@@ -38,10 +38,10 @@
                     class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
                     Kesehatan
                 </a>
-                <a href="#" 
+                <a href="{{ route('orang_tua.edit', $siswa->siswaID) }}" 
                 class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
                 Orang Tua / Wali
-            </a>
+                </a>
             </div>
         </div>
 

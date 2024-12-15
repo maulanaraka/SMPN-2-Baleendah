@@ -41,7 +41,7 @@ class TempatTinggalController extends Controller
         $siswa = Siswa::findOrFail($siswaID);
         $tempatTinggal = TempatTinggal::where('SiswasiswaID', $siswaID)->first(); // Fetch related health data
 
-        return view('siswa.edit.tempat_tinggal', compact('siswa', 'tempatTinggal')); // Replace 'kesehatan.show' with your actual view name
+        return view('siswa.tempat_tinggal', compact('siswa', 'tempatTinggal')); // Replace 'kesehatan.show' with your actual view name
     }
 
     /**

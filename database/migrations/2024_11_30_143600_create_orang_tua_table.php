@@ -17,21 +17,21 @@ return new class extends Migration
             
             $table->string('namaIbu', 255); 
             $table->string('nomorTeleponIbu', 25); 
-            $table->string('tempatLahirIbu', 50);
+            $table->string('tempatLahirIbu', 255);
             $table->date('tanggalLahirIbu');
-            $table->string('kewarganegaraanIbu', 50);
-            $table->string('pendidikanTertinggiIbu', 25);
-            $table->string('pekerjaanIbu', 50);
+            $table->string('kewarganegaraanIbu', 255);
+            $table->string('pendidikanTertinggiIbu', 255);
+            $table->string('pekerjaanIbu', 255);
             $table->float('penghasilanIbu', 20);
             $table->string('alamatIbu', 255);
 
             $table->string('namaAyah', 255); 
             $table->string('nomorTeleponAyah', 25); 
-            $table->string('tempatLahirAyah', 50);
+            $table->string('tempatLahirAyah', 255);
             $table->date('tanggalLahirAyah');
-            $table->string('kewarganegaraanAyah', 50);
-            $table->string('pendidikanTertinggiAyah', 25);
-            $table->string('pekerjaanAyah', 50);
+            $table->string('kewarganegaraanAyah', 255);
+            $table->string('pendidikanTertinggiAyah', 255);
+            $table->string('pekerjaanAyah', 255);
             $table->float('penghasilanAyah', 20);
             $table->string('alamatAyah', 255);
             $table->timestamps();

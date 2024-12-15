@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
             SiswaSeeder::class,
             KesehatanSeeder::class,
             TempatTinggalSeeder::class,
+            OrangTuaSeeder::class,
+            WaliSeeder::class,
         ]);
     }
 }

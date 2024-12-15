@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('ekstrakurikuler', function (Blueprint $table) {
             $table->increments('ekstrakurikulerID');
+            $table->string('nama', 255)->nullable();
             $table->string('deskripsi', 255)->nullable();
             $table->timestamps();
         });        

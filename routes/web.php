@@ -2,15 +2,18 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SessionController;
+
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\KesehatanController;
 use App\Http\Controllers\TempatTinggalController;
 use App\Http\Controllers\OrangTuaController;
 use App\Http\Controllers\WaliController;
 
+use App\Http\Controllers\EkstrakurikulerController;
+use App\Http\Controllers\KelasController;
+use App\Http\Controllers\MataPelajaranController;
 
 use App\Http\Middleware\UserAccess;
-use App\Models\Wali;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,6 +38,31 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 // Operator
 Route::middleware(['auth', 'role:operator'])->group(function () {
     Route::get('/operator', [UserController::class, 'operator'])->name('operator');
+
+    // Ekstrakurikuler
+    Route::get('/ekstrakurikuler', [EkstrakurikulerController::class, 'index'])->name('ekstrakurikuler.index');
+    Route::get('/ekstrakurikuler/create', [EkstrakurikulerController::class, 'create'])->name('ekstrakurikuler.create');
+    Route::post('/ekstrakurikuler', [EkstrakurikulerController::class, 'store'])->name('ekstrakurikuler.store');
+    Route::get('/ekstrakurikuler/{ekstrakurikulerID}/edit', [EkstrakurikulerController::class, 'edit'])->name('ekstrakurikuler.edit');
+    Route::put('/ekstrakurikuler/{ekstrakurikulerID}', [EkstrakurikulerController::class, 'update'])->name('ekstrakurikuler.update');
+    Route::delete('/ekstrakurikuler/{ekstrakurikulerID}', [EkstrakurikulerController::class, 'destroy'])->name('ekstrakurikuler.destroy');
+
+    // Kelas
+    Route::get('/kelas', [KelasController::class, 'index'])->name('kelas.index');
+    Route::get('/kelas/create', [KelasController::class, 'create'])->name('kelas.create');
+    Route::post('/kelas', [KelasController::class, 'store'])->name('kelas.store');
+    Route::get('/kelas/{kelasID}/edit', [KelasController::class, 'edit'])->name('kelas.edit');
+    Route::put('/kelas/{kelasID}', [KelasController::class, 'update'])->name('kelas.update');
+    Route::delete('/kelas/{kelasID}', [KelasController::class, 'destroy'])->name('kelas.destroy');
+
+    // Mata Pelajaran
+    Route::get('/mata-pelajaran', [MataPelajaranController::class, 'index'])->name('mata_pelajaran.index');
+    Route::get('/mata-pelajaran/create', [MataPelajaranController::class, 'create'])->name('mata_pelajaran.create');
+    Route::post('/mata-pelajaran', [MataPelajaranController::class, 'store'])->name('mata_pelajaran.store');
+    Route::get('/mata-pelajaran/{mataPelajaranID}/edit', [MataPelajaranController::class, 'edit'])->name('mata_pelajaran.edit');
+    Route::put('/mata-pelajaran/{mataPelajaranID}', [MataPelajaranController::class, 'update'])->name('mata_pelajaran.update');
+    Route::delete('/mata-pelajaran/{mataPelajaranID}', [MataPelajaranController::class, 'destroy'])->name('mata_pelajaran.destroy');
+
 });
 
 // Staff

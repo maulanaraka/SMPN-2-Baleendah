@@ -23,11 +23,11 @@ return new class extends Migration
             // foreign key
             $table  ->foreign('Siswa_KelasSiswasiswaID')
                     ->references('SiswasiswaID')
-                    ->on('siswa_kelas')
+                    ->on('kelas_siswa')
                     ->onDelete('cascade');
             $table  ->foreign('Siswa_KelasKelaskelasID')
                     ->references('KelaskelasID')
-                    ->on('siswa_kelas')
+                    ->on('kelas_siswa')
                     ->onDelete('cascade');
         });
     }

@@ -11,20 +11,25 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('siswa_kelas', function (Blueprint $table) {
+        Schema::create('kelas_siswa', function (Blueprint $table) {
+            // Foreign keys without auto-incrementing IDs
             $table->string('SiswasiswaID', 50);
             $table->unsignedInteger('KelaskelasID');
             $table->timestamps();
         
-            // foreign key
+            // Foreign keys with cascade on delete
             $table  ->foreign('SiswasiswaID')
                     ->references('siswaID')
                     ->on('siswa')
                     ->onDelete('cascade');
+
             $table  ->foreign('KelaskelasID')
                     ->references('kelasID')
                     ->on('kelas')
                     ->onDelete('cascade');
+            
+            // Composite primary key for the pivot table
+            $table->primary(['SiswasiswaID', 'KelaskelasID']);
         });        
     }
 
@@ -33,6 +38,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('siswa_kelas');
+        Schema::dropIfExists('kelas_siswa');
     }
 };
+

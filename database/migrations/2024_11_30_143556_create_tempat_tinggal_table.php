@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('SiswasiswaID', 50); 
             
             $table->string('jalan', 100);
+            $table->string('kota', 100);
             $table->string('kodePos', 100);
             $table->string('provinsi', 100);
             $table->string('tinggalBersama', 100);

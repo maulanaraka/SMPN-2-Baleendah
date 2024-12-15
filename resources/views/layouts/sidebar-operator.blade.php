@@ -4,7 +4,9 @@
     </div>
     <nav class="mt-6 px-3 space-y-4">
         <a href="{{ route('operator') }}" class="block px-4 py-2 text-[#111928] text-base font-medium rounded">Dashboard</a>
-        <a href="{{ route('data-siswa') }}" class="block px-4 py-2 text-[#111928] text-base font-medium rounded">Data Siswa</a>
+        <a href="{{ route('mata_pelajaran.index') }}" class="block px-4 py-2 text-[#111928] text-base font-medium rounded">Mata Pelajaran</a>
+        <a href="{{ route('kelas.index') }}" class="block px-4 py-2 text-[#111928] text-base font-medium rounded">Kelas</a>
+        <a href="{{ route('ekstrakurikuler.index') }}" class="block px-4 py-2 text-[#111928] text-base font-medium rounded">Ekstrakurikuler</a>
     </nav>
     <!-- Logout Form -->
     <div class="absolute bottom-0 left-0 w-full p-4">

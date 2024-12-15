@@ -16,7 +16,7 @@
         <table class="min-w-full bg-white">
             <thead>
                 <tr>
-                    <th class="py-2 px-4 border-b">ID</th>
+                    <th class="py-2 px-4 border-b">NIS</th>
                     <th class="py-2 px-4 border-b">NISN</th>
                     <th class="py-2 px-4 border-b">Nama Lengkap</th>
                     <th class="py-2 px-4 border-b">Nama Panggilan</th>

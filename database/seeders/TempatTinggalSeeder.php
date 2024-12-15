@@ -28,8 +28,10 @@ class TempatTinggalSeeder extends Seeder
                 'kodePos' => $faker->numberBetween(10000, 99999),
                 'provinsi' => $faker->state,
                 'tinggalBersama' => $faker->randomElement(['Orang Tua', 'Bapak', 'Ibu', 'Saudara', 'Ayam', 'Zeus', 'Mulyono']),
-                'jarakKeSekolah' => rand(1, 20), 
+                'jarakKeSekolah' => number_format(rand(100, 2000) / 100, 2),
                 'kendaraan' => $faker->randomElement(['Kuda', 'Anjing', 'Sapi', 'Babirusa', 'Jalan', 'Ngesot Pake Keyboard']),
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
     }

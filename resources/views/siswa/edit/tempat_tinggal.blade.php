@@ -42,8 +42,8 @@
 
         <div class="mb-4">
             <label for="jarakKeSekolah" class="block">Jarak ke Sekolah (km)</label>
-            <input type="number" name="jarakKeSekolah" value="{{ old('jarakKeSekolah', $tempatTinggal->jarakKeSekolah) }}" class="w-full px-4 py-2 border border-gray-300 rounded-lg" required>
-        </div>
+            <input type="number" name="jarakKeSekolah" value="{{ old('jarakKeSekolah', $tempatTinggal->jarakKeSekolah) }}" class="w-full px-4 py-2 border border-gray-300 rounded-lg" required step="0.01">
+        </div>        
 
         <div class="mb-4">
             <label for="kendaraan" class="block">Kendaraan</label>

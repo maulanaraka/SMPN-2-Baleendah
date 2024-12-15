@@ -30,7 +30,7 @@ class KesehatanSeeder extends Seeder
                 'beratLulus' => $lulus ? rand(30, 70) : null, // Set to null if not passed
                 'tinggiLulus' => $lulus ? rand(140, 180) : null, // Set to null if not passed
                 'golDarah' => $faker->randomElement(['A', 'B', 'AB', 'O']), // Random blood type
-                'penyakitKhusus' => rand(0, 1) ? Str::random(10) : null, // Random disease, set to null 50% of the time
+                'penyakitKhusus' => rand(0, 1) ? $faker->randomElement([$faker->word, 'Gabisa Jalan', 'Napas Jarang', 'Syndrome Sushi Tei', 'Kurang Kasih Sayang']) : null, // Random disease, set to null 50% of the time
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

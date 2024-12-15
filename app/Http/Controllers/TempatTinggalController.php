@@ -66,7 +66,7 @@ class TempatTinggalController extends Controller
             'kodePos' => 'required|string|max:100',
             'provinsi' => 'required|string|max:100',
             'tinggalBersama' => 'required|string|max:100',
-            'jarakKeSekolah' => 'required|integer',
+            'jarakKeSekolah' => 'required|numeric|min:1|max:20',
             'kendaraan' => 'required|string|max:100',
         ]);
 

@@ -4,6 +4,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\KesehatanController;
+use App\Http\Controllers\TempatTinggalController;
+
 use App\Http\Middleware\UserAccess;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -46,6 +48,11 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
     Route::post('/kesehatan', [KesehatanController::class, 'store'])->name('kesehatan.store');
     Route::get('/kesehatan/{kesehatanID}/edit', [KesehatanController::class, 'edit'])->name('kesehatan.edit');
     Route::put('/kesehatan/{kesehatanID}', [KesehatanController::class, 'update'])->name('kesehatan.update');
+
+    // Tempat Tinggal
+    Route::get('tempat-tinggal/{tempatTinggalID}/edit', [TempatTinggalController::class, 'edit'])->name('tempat_tinggal.edit');
+    Route::put('tempat-tinggal{tempatTinggalID}', [TempatTinggalController::class, 'update'])->name('tempat_tinggal.update');
+
 });
 
 

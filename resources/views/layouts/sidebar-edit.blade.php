@@ -30,7 +30,8 @@
                     class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
                     Siswa
                 </a>
-                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                <a href="{{ route('tempat_tinggal.edit', $siswa->siswaID) }}" 
+                    class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
                     Tempat Tinggal
                 </a>
                 <a href="{{ route('kesehatan.edit', $siswa->siswaID) }}"  

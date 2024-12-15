@@ -36,5 +36,9 @@ class Siswa extends Model
     {
         return $this->hasOne(Kesehatan::class, 'SiswasiswaID', 'siswaID');
     }
+    public function tempatTinggal()
+    {
+        return $this->hasOne(TempatTinggal::class, 'SiswasiswaID', 'siswaID');
+    }
 
 }

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Login Page')
-@section('content')
+@section('public')
 <div class="container mx-auto py-10">
     <div class="max-w-md mx-auto bg-white shadow-md rounded-lg p-6">
         <h1 class="text-2xl font-bold mb-4 text-center">Login</h1>

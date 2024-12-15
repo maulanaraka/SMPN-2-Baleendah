@@ -42,7 +42,7 @@ class SiswaSeeder extends Seeder
                 'saudaraTiri' => $faker->numberBetween(0, 5),
                 'saudaraAngkat' => $faker->numberBetween(0, 5),
                 'yatimPiatu' => $faker->randomElement(['Yatim', 'Piatu', 'Yatim Piatu', 'Tidak']),
-                'bahasaDirumah' => $faker->randomElement(['Indonesia', 'Jawa', 'Sunda', 'Rock Bottom,', 'Madura', 'Kucing', 'Nyamnyam']),
+                'bahasaDirumah' => $faker->randomElement(['Indonesia', 'Jawa', 'Sunda', 'Rock Bottom', 'Madura', 'Kucing', 'Nyamnyam']),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

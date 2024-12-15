@@ -12,24 +12,39 @@
 <div class="w-full h-auto bg-white rounded-lg shadow p-6">
     <h1 class="text-2xl font-semibold mb-6">Edit Data Kelas Siswa</h1>
     <!-- Edit Wali -->
-    <form action="{{ route('siswa_kelas.update', $kelas->SiswasiswaID) }}" method="POST">
+    <form action="{{ route('siswa_kelas.update', $siswa_kelas->SiswasiswaID) }}" method="POST">
         @csrf
         @method('PUT')
-        <div class="mb-4">
-            <label for="namaWali" class="block">Kelas</label>
-            <input type="text" name="namaWali" value="{{ old('namaWali', $wali->namaWali ?? '')}}" class="w-full px-4 py-2 border border-gray-300 rounded-lg">
-        </div>
-        <div class="mb-4">
-            <label for="alamatWali" class="block">Tahun Ajaran</label>
-            <input type="text" name="alamatWali" value="{{ old('alamatWali', $wali->alamatWali ?? '') }}" class="w-full px-4 py-2 border border-gray-300 rounded-lg">
-        </div>
-        <div class="mb-4">
-            <label for="hubunganDenganSiswa" class="block">Hubungan Dengan Siswa</label>
-            <input type="text" name="hubunganDenganSiswa" value="{{ old('hubunganDenganSiswa', $wali->hubunganDenganSiswa ?? '') }}" class="w-full px-4 py-2 border border-gray-300 rounded-lg">
-        </div>
-        <!-- Add other fields for Wali similarly -->
+    
+        @foreach ($siswaKelas as $kelas)
+            <div class="mb-4">
+                <label for="TahunAjaran_{{ $kelas->id }}" class="block">Tahun Ajaran</label>
+                <input type="text" name="kelas[{{ $loop->index }}][TahunAjaran]" 
+                        id="TahunAjaran_{{ $kelas->id }}" 
+                        value="{{ old("kelas.$loop->index.TahunAjaran", $kelas->TahunAjaran) }}" 
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg">
+                
+                <input type="hidden" name="kelas[{{ $loop->index }}][id]" value="{{ $kelas->id }}">
+            </div>
+            
+            <div class="mb-4">
+                <label for="KelaskelasID_{{ $kelas->id }}" class="block">Kelas</label>
+                <select name="kelas[{{ $loop->index }}][KelaskelasID]" 
+                        id="KelaskelasID_{{ $kelas->id }}" 
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg">
+                    @foreach ($allKelas as $kelasOption)
+                        <option value="{{ $kelasOption->kelasID }}" 
+                                {{ $kelasOption->kelasID == $kelas->KelaskelasID ? 'selected' : '' }}>
+                            {{ $kelasOption->namaKelas }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+        @endforeach
+    
         <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Update</button>
     </form>
+    
 </div>
 
 @endsection

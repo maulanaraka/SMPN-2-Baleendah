@@ -30,11 +30,10 @@ class Kelas extends Model
         'updated_at' => 'datetime',
     ];
 
-    // Optional relationships (e.g., if a class has students)
-    // public function students()
-    // {
-    //     return $this->hasMany(Student::class);
-    // }
+    public function siswaKelas()
+    {
+        return $this->hasOne(siswaKelas::class, 'SiswasiswaID', 'siswaID');
+    }
 }
 
 

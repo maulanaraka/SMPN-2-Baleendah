@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('mata_pelajaran', function (Blueprint $table) {
             $table->increments('mataPelajaranID');
             $table->string('mataPelajaran', 255);
-            $table->string('DeskripsiMataPelajaran', 255);
+            $table->string('deskripsiMataPelajaran', 255);
             $table->integer('KKMPengetahuan');
             $table->integer('KKMKeterampilan');
             $table->timestamps();

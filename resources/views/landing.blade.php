@@ -2,7 +2,7 @@
 
 @section('Buku Induk Siswa', 'Landing Page') <!-- Optional: Set the title for this page -->
 
-@section('content')
+@section('public')
 <body class="bg-gray-50">
 
     <!-- Navigation Bar -->

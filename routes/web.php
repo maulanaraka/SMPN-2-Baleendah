@@ -14,13 +14,10 @@ use App\Models\Wali;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-// Landing page (No authentication required)
-Route::get('/', function () {
-    return view('landing');
-});
 
 // Authentication Routes
 Route::middleware('guest')->group(function () {
+    Route::get('/', function () {return view('landing');});
     Route::get('/login', [SessionController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [SessionController::class, 'login']);
 });
@@ -29,14 +26,18 @@ Route::middleware('guest')->group(function () {
 Route::post('/logout', [SessionController::class, 'logout'])->name('logout')->middleware('auth');
 
 // User Role-Based Routes
+
+//Admin
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin', [UserController::class, 'admin'])->name('admin');
 });
 
+// Operator
 Route::middleware(['auth', 'role:operator'])->group(function () {
     Route::get('/operator', [UserController::class, 'operator'])->name('operator');
 });
 
+// Staff
 Route::middleware(['auth', 'role:staff'])->group(function () {
     Route::get('/staff', [UserController::class, 'staff'])->name('staff');
 

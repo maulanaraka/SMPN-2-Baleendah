@@ -25,6 +25,10 @@ return new class extends Migration
                     ->references('beasiswaID')
                     ->on('beasiswa')
                     ->onDelete('cascade');
+            
+            // Composite primary key for the pivot table
+            $table->primary(['SiswasiswaID', 'BeasiswabeasiswaID']);
+            
         });
     }
 

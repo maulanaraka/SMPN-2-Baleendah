@@ -12,19 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('wali', function (Blueprint $table) {
-            $table->increments('waliID');
-            $table->string('SiswasiswaID', 50);
+            $table->increments('waliID')->nullable();
+            $table->string('SiswasiswaID', 50)->nullable();
             
-            $table->string('namaWali', 255); 
-            $table->string('nomorTeleponWali', 25); 
-            $table->string('tempatLahirWali', 50);
-            $table->date('tanggalLahirWali');
-            $table->string('kewarganegaraanWali', 50);
-            $table->string('pendidikanTertinggiWali', 25);
-            $table->string('pekerjaanWali', 50);
-            $table->float('penghasilanWali', 20);
-            $table->string('alamatWali', 255);
-            $table->string('hubunganDenganSiswa', 50);
+            $table->string('namaWali', 255)->nullable(); 
+            $table->string('nomorTeleponWali', 25)->nullable(); 
+            $table->string('tempatLahirWali', 50)->nullable();
+            $table->date('tanggalLahirWali')->nullable();
+            $table->string('kewarganegaraanWali', 255)->nullable();
+            $table->string('pendidikanTertinggiWali', 255)->nullable();
+            $table->string('pekerjaanWali', 255)->nullable();
+            $table->float('penghasilanWali', 20)->nullable();
+            $table->string('alamatWali', 255)->nullable();
+            $table->string('hubunganDenganSiswa', 50)->nullable();
+            $table->timestamps();
 
             // foreign key
             $table  ->foreign('SiswasiswaID')

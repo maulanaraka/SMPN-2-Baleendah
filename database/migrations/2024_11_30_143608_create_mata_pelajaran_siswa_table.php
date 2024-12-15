@@ -35,6 +35,9 @@ return new class extends Migration
                     ->references('mataPelajaranID')
                     ->on('mata_pelajaran')
                     ->onDelete('cascade');
+            
+            // Composite primary key for the pivot table
+            $table->primary(['SiswasiswaID', 'MataPelajaranmataPelajaranID']);
         });
     }
 

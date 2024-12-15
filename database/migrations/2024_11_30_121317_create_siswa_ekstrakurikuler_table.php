@@ -29,6 +29,9 @@ return new class extends Migration
                     ->references('ekstrakurikulerID')
                     ->on('ekstrakurikuler')
                     ->onDelete('cascade');
+
+            // Composite primary key for the pivot table
+            $table->primary(['SiswasiswaID', 'EkstrakurikulerekstrakurikulerID']);
         });        
     }
 

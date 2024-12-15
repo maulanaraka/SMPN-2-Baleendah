@@ -30,7 +30,7 @@
 
     <!-- Landing Page (Guest Users) -->
     @guest
-        @yield('content')
+        @yield('public')
     @endguest
 </body>
 </html>

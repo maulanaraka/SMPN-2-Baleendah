@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('content')
+@section('public')
 <form action="{{ route('register') }}" method="POST">
     @csrf
     <input type="text" name="name" placeholder="Name" required>

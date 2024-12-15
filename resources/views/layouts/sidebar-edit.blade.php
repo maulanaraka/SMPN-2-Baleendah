@@ -58,13 +58,13 @@
                 class="transition-all duration-300 ease-in-out overflow-hidden max-h-0 bg-white rounded-md shadow-lg border border-gray-200"
             >
                 <a href="#" 
-                class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
-                Kelas
-            </a>
+                    class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                    Kelas
+                </a>
                 <a href="#" 
-                class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
-                Pindah Kelas
-            </a>
+                    class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                    Pindah Kelas
+                </a>
             </div>
         </div>
 
@@ -81,27 +81,27 @@
                 class="transition-all duration-300 ease-in-out overflow-hidden max-h-0 bg-white rounded-md shadow-lg border border-gray-200"
             >
                 <a href="#" 
-                class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
-                Kehadiran
+                    class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                    Kehadiran
                 </a>
                 <a href="#" 
-                class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                    class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
                     Nilai Siswa
                 </a>
                 <a href="#" 
-                class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                    class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
                     Ekstrakulikuler
                 </a>
                 <a href="#" 
-                class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                    class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
                     Prestasi
                 </a>
                 <a href="#" 
-                class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                    class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
                     Beasiswa
                 </a>
                 <a href="#" 
-                class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                    class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
                     Intelegensi dan Kepribadian
                 </a>
             </div>
@@ -120,21 +120,21 @@
                 class="transition-all duration-300 ease-in-out overflow-hidden max-h-0 bg-white rounded-md shadow-lg border border-gray-200"
             >
                 <a href="#" 
-                class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
-                Kelulusan
-            </a>
+                    class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                    Kelulusan
+                </a>
                 <a href="#" 
-                class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
-                Pendidikan Sebelumnya
-            </a>
+                    class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                    Pendidikan Sebelumnya
+                </a>
                 <a href="#" 
-                class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
-                Pindah Sekolah
-            </a>
+                    class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                    Pindah Sekolah
+                </a>
                 <a href="#" 
-                class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
-                Catatan Siswa
-            </a>
+                    class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                    Catatan Siswa
+                </a>
             </div>
         </div>
     </div>

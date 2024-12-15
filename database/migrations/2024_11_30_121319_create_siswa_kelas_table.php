@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kelas_siswa', function (Blueprint $table) {
+        Schema::create('siswa_kelas', function (Blueprint $table) {
             // Foreign keys without auto-incrementing IDs
             $table->string('SiswasiswaID', 50);
             $table->unsignedInteger('KelaskelasID');
+            $table->string('TahunAjaran');
             $table->timestamps();
         
             // Foreign keys with cascade on delete

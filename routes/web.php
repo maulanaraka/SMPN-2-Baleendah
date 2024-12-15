@@ -12,7 +12,7 @@ use App\Http\Controllers\WaliController;
 use App\Http\Controllers\EkstrakurikulerController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MataPelajaranController;
-
+use App\Http\Controllers\SiswaKelasController;
 use App\Http\Middleware\UserAccess;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -90,9 +90,13 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
     Route::get('orang-tua/{orangTuaID}/edit', [OrangTuaController::class, 'edit'])->name('orang_tua.edit');
     Route::put('orang-tua/{orangTuaID}', [OrangTuaController::class, 'update'])->name('orang_tua.update');
     
-    // Orang Tua
-    Route::get('wali/{siswaId}/edit', [WaliController::class, 'edit'])->name('wali.edit');
-    Route::put('wali/{siswaId}', [WaliController::class, 'update'])->name('wali.update');
+    // Wali
+    Route::get('wali/{waliId}/edit', [WaliController::class, 'edit'])->name('wali.edit');
+    Route::put('wali/{waliaId}', [WaliController::class, 'update'])->name('wali.update');
+
+    // Kelas
+    Route::get('kelas/{siswaKelasID}/edit', [SiswaKelasController::class, 'edit'])->name('siswa_kelas.edit');
+    Route::put('kelas/{siswaKelasID}', [SiswaKelasController::class, 'update'])->name('siswa_kelas.update');
 });
 
 

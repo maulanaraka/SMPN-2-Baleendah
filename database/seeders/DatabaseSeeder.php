@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             TempatTinggalSeeder::class,
             OrangTuaSeeder::class,
             WaliSeeder::class,
+            SiswaKelasSeeder::class,
             EkstrakurikulerSeeder::class,
             KelasSeeder::class,
             MataPelajaranSeeder::class,

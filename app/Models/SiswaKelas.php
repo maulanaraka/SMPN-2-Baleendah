@@ -32,7 +32,8 @@ class SiswaKelas extends Model
     public function kelas()
     {
         return $this->belongsTo(Kelas::class, 'KelaskelasID', 'kelasID');
-    }
+    }    
+
 
     // Scopes
     // public function scopeActive($query)

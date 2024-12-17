@@ -31,20 +31,21 @@ class KehadiranController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'SiswasiswaID' => 'required|string|max:50',
-            'kelas' => 'required|string|max:10',
-            'semester' => 'required|integer',
+            // 'SiswasiswaID' => 'required|string|max:50',
+            // 'kelas' => 'required|string|max:10',
+            // 'semester' => 'required|integer',
             'jumlahHadir' => 'required|integer',
             'presentaseHadir' => 'required|numeric',
             'sakit' => 'required|integer',
             'izin' => 'required|integer',
             'alpa' => 'required|integer',
-            'jumlahTidakHadir' => 'required|integer',
             'presentaseTidakHadir' => 'required|numeric',
             'jumlahHariBelajarEfektif' => 'required|integer',
         ]);
 
+        // Create Kehadiran record
         Kehadiran::create($request->all());
+
         return redirect()->route('kehadiran.index')->with('success', 'Kehadiran created successfully.');
     }
 
@@ -54,7 +55,7 @@ class KehadiranController extends Controller
     public function edit($siswaID)
     {
         $siswa = Siswa::findOrFail($siswaID); // Ensure the siswa exists
-        $kehadiran = Kehadiran::where('SiswasiswaID', $siswaID)->firstOrFail(); // Find the kesehatan data for this siswa
+        $kehadiran = Kehadiran::where('SiswasiswaID', $siswaID)->firstOrFail(); // Find the kehadiran data for this siswa
     
         return view('siswa.edit.kehadiran', compact('siswa','kehadiran'));
     }
@@ -65,21 +66,22 @@ class KehadiranController extends Controller
     public function update(Request $request, $siswaID)
     {
         $request->validate([
-            'SiswasiswaID' => 'required|string|max:50',
-            'kelas' => 'required|string|max:10',
-            'semester' => 'required|integer',
+            // 'SiswasiswaID' => 'required|string|max:50',
+            // 'kelas' => 'required|string|max:10',
+            // 'semester' => 'required|integer',
             'jumlahHadir' => 'required|integer',
             'presentaseHadir' => 'required|numeric',
             'sakit' => 'required|integer',
             'izin' => 'required|integer',
             'alpa' => 'required|integer',
-            'jumlahTidakHadir' => 'required|integer',
             'presentaseTidakHadir' => 'required|numeric',
             'jumlahHariBelajarEfektif' => 'required|integer',
         ]);
 
+        // Find and update Kehadiran record
         $kehadiran = Kehadiran::where('SiswasiswaID', $siswaID)->firstOrFail();
         $kehadiran->update($request->all());
+
         return back()->with('success', 'Data berhasil diperbarui!');
     }
 

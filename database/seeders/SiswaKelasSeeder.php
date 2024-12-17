@@ -21,7 +21,7 @@ class SiswaKelasSeeder extends Seeder
 
         foreach ($siswaIDs as $siswaID) {
             $tahunStart = $faker->year; // Starting academic year
-            $maxClasses = $faker->numberBetween(1, 4); // Randomly assign up to 4 class records
+            $maxClasses = $faker->numberBetween(1, 3); // Randomly assign up to 4 class records
 
             for ($i = 0; $i < $maxClasses; $i++) {
                 // Generate random data

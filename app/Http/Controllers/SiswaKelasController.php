@@ -2,86 +2,95 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\SiswaKelas;
 use App\Models\Siswa;
 use App\Models\Kelas;
+use App\Models\SiswaKelas;
 use Illuminate\Http\Request;
 
 class SiswaKelasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($siswaID)
+    // Display the list of classes for a student
+    
+    public function editKelasIndex($siswaID)
     {
         $siswa = Siswa::findOrFail($siswaID);
-        $siswaKelas = SiswaKelas::where('SiswasiswaID', $siswaID)->first();
-        $allKelas = Kelas::all(); // Fetch all kelas options
+        $siswaKelas = SiswaKelas::where('SiswasiswaID', $siswaID)->get();
+        $siswaKelas = $siswaKelas->sortBy(function($kelas) {
+            return $kelas->kelas->kelasID ?? ''; // Sorting by kelasID
+        });
 
-        if (!$siswaKelas) {
-            return back()->withErrors('Data siswa kelas tidak ditemukan.');
-        }
-
-        return view('siswa.edit.kelas', compact('siswa', 'siswaKelas', 'allKelas'));
+        return view('siswa.edit.kelas.index', compact('siswa', 'siswaKelas'));
     }
 
-    public function update(Request $request, $siswaID)
+    // Show the form for editing a specific class of a student
+    public function editKelas($siswaID, $siswaKelasID)
     {
-        $data = $request->validate([
-            'kelas' => 'required|array',
-            'kelas.*.id' => 'required|exists:siswa_kelas,id',
-            'kelas.*.TahunAjaran' => 'required|string',
-            'kelas.*.KelaskelasID' => 'required|exists:kelas,kelasID',
+        $siswa = Siswa::findOrFail($siswaID);
+        $kelasData = SiswaKelas::findOrFail($siswaKelasID);
+        $kelasList = Kelas::all(); // Fetch all available classes
+
+        return view('siswa.edit.kelas.edit', compact('siswa', 'kelasData', 'kelasList'));
+    }
+
+    public function createKelas($siswaID)
+    {
+        $siswa = Siswa::findOrFail($siswaID);
+        $kelasList = Kelas::all(); // List all available classes
+        return view('siswa.edit.kelas.create', compact('siswa', 'kelasList'));
+    }
+
+    // Store a new class assignment for a student
+    public function storeKelas(Request $request, $siswaID)
+    {
+        $request->validate([
+            'KelaskelasID' => 'required|exists:kelas,kelasID',
+            'TahunAjaran' => 'required|string',
+            'status' => 'required|in:aktif,nonaktif',
+            'tanggalMasuk' => 'required|date', // Validate the tanggalMasuk field
+            'tanggalKeluar' => 'nullable|date', // Make tanggalKeluar nullable and validate as date if provided
+            'alasanPindah' => 'nullable|string', // Make alasanPindah nullable and validate as string if provided
         ]);
 
-        foreach ($data['kelas'] as $kelas) {
-            SiswaKelas::where('id', $kelas['id'])->update([
-                'TahunAjaran' => $kelas['TahunAjaran'],
-                'KelaskelasID' => $kelas['KelaskelasID'],
-            ]);
-        }
+        SiswaKelas::create([
+            'SiswasiswaID' => $siswaID,
+            'KelaskelasID' => $request->KelaskelasID,
+            'TahunAjaran' => $request->TahunAjaran,
+            'status' => $request->status,
+            'tanggalMasuk' => $request->tanggalMasuk, // Store tanggalMasuk as it's required
+            'tanggalKeluar' => $request->tanggalKeluar, // Store tanggalKeluar if provided, else null
+            'alasanPindah' => $request->alasanPindah, // Store alasanPindah if provided, else null
+        ]);
 
-        return redirect()->route('siswa.edit.kelas', $siswaID)->with('success', 'Data berhasil diperbarui!');
+        return redirect()->route('siswa.kelas.index', $siswaID)
+            ->with('success', 'Kelas berhasil ditambahkan.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    // Update an existing class assignment for a student
+    public function updateKelas(Request $request, $siswaID, $siswaKelasID)
     {
-        //
+        $request->validate([
+            'KelaskelasID' => 'required|exists:kelas,kelasID',
+            'TahunAjaran' => 'required|string',
+            'status' => 'required|in:aktif,nonaktif',
+        ]);
+    
+        $siswaKelas = SiswaKelas::findOrFail($siswaKelasID);
+        $siswaKelas->update([
+            'KelaskelasID' => $request->KelaskelasID,
+            'TahunAjaran' => $request->TahunAjaran,
+            'status' => $request->status,
+        ]);
+    
+        return redirect()->route('siswa.kelas.index', $siswaID)->with('success', 'Kelas berhasil diperbarui.');
+    }    
+
+    // Delete a class assignment for a student
+    public function destroyKelas($siswaID, $siswaKelasID)
+    {
+        $siswaKelas = SiswaKelas::findOrFail($siswaKelasID);
+        $siswaKelas->delete();
+
+        return redirect()->route('siswa.kelas.index', $siswaID)
+            ->with('success', 'Kelas berhasil dihapus.');
     }
 }

@@ -12,14 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('siswa_kelas', function (Blueprint $table) {
-            $table->increments('siswaKelasID'); // Single primary key
+            $table->increments('siswaKelasID');
             $table->string('SiswasiswaID', 50);
-            $table->unsignedInteger('KelaskelasID');
-
+            $table->string('KelaskelasID', 50); // Change to match the primary key in kelas
             $table->string('TahunAjaran');
             $table->date('tanggalMasuk');
             $table->date('tanggalKeluar')->nullable();
-            $table->enum('status',['aktif','nonaktif']);
+            $table->enum('status', ['aktif', 'nonaktif']);
             $table->string('alasanPindah')->nullable();
             $table->timestamps();
         
@@ -31,10 +30,8 @@ return new class extends Migration
             $table  ->foreign('KelaskelasID')
                     ->references('kelasID')
                     ->on('kelas');
-        
-            // Composite unique constraint
-            // $table->unique(['SiswasiswaID', 'KelaskelasID']);
         });
+        
     }
 
     /**

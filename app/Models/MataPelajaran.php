@@ -33,6 +33,11 @@ class MataPelajaran extends Model
         'updated_at' => 'datetime',
     ];
 
+    public function siswaMataPelajaran()
+    {
+        return $this->hasMany(MataPelajaranSiswa::class, 'MataPelajaranmataPelajaranID', 'mataPelajaranID');
+    }    
+
     // Optional relationships (e.g., if mata_pelajaran has students or classes)
     // public function classes()
     // {

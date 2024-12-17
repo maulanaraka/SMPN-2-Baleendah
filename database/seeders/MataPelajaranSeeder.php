@@ -16,7 +16,7 @@ class MataPelajaranSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        foreach (range(1, 10) as $index) {
+        foreach (range(1, 3) as $index) {
             DB::table('mata_pelajaran')->insert([
                 'mataPelajaran' => $faker->word,
                 'deskripsiMataPelajaran' => $faker->sentence,

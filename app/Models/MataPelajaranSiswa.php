@@ -25,27 +25,18 @@ class MataPelajaranSiswa extends Model
         'semester',
     ];
 
-    /**
-     * Define the relationship with the Siswa model
-     */
     public function siswa()
     {
         return $this->belongsTo(Siswa::class, 'SiswasiswaID', 'siswaID');
     }
-
-    /**
-     * Define the relationship with the MataPelajaran model
-     */
-    public function mataPelajaran()
-    {
-        return $this->belongsTo(MataPelajaran::class, 'MataPelajaranmataPelajaranID', 'mataPelajaranID');
-    }
-
-    /**
-     * Define the relationship with the SiswaKelas model
-     */
     public function siswaKelas()
     {
         return $this->belongsTo(SiswaKelas::class, 'siswa_kelassiswaKelasID', 'siswaKelasID');
     }
+    
+    public function mataPelajaran()
+    {
+        return $this->belongsTo(MataPelajaran::class, 'MataPelajaranmataPelajaranID', 'mataPelajaranID');
+    }
+    
 }

@@ -10,7 +10,6 @@ class Kehadiran extends Model
     use HasFactory;
 
     protected $table = 'kehadiran'; // Specify the table name
-
     protected $primaryKey = 'kehadiranID'; // Primary key
 
     public $timestamps = false; // Since there are no created_at or updated_at columns
@@ -34,5 +33,25 @@ class Kehadiran extends Model
     public function siswa()
     {
         return $this->belongsTo(Siswa::class, 'SiswasiswaID', 'siswaID');
+    }
+
+    /**
+     * Accessor for jumlahTidakHadir.
+     * This dynamically calculates the jumlahTidakHadir when retrieving the data.
+     */
+    public function getJumlahTidakHadirAttribute()
+    {
+        return $this->izin + $this->sakit + $this->alpa;
+    }
+
+    /**
+     * Automatically calculate jumlahTidakHadir when saving the model.
+     */
+    protected static function booted()
+    {
+        static::saving(function ($kehadiran) {
+            // Calculate jumlahTidakHadir before saving
+            $kehadiran->jumlahTidakHadir = $kehadiran->izin + $kehadiran->sakit + $kehadiran->alpa;
+        });
     }
 }

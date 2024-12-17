@@ -15,25 +15,29 @@ class MataPelajaranSiswaSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        // Fetching the relevant IDs from related tables
-        $siswaIDs = DB::table('siswa')->pluck('siswaID');
+        // Fetch mataPelajaran and siswa_kelas data
         $mataPelajaranIDs = DB::table('mata_pelajaran')->pluck('mataPelajaranID');
-        $siswaKelasIDs = DB::table('siswa_kelas')->pluck('siswaKelasID');
+        $siswaKelasRecords = DB::table('siswa_kelas')->get(); // Fetch all rows from siswa_kelas
 
-        foreach ($siswaIDs as $siswaID) {
-            foreach ($mataPelajaranIDs as $mataPelajaranID) {
-                foreach ($siswaKelasIDs as $siswaKelasID) {
+        foreach ($siswaKelasRecords as $siswaKelas) {
+            // Extract SiswasiswaID and KelaskelasID for each siswa_kelas
+            $siswaID = $siswaKelas->SiswasiswaID;
+            $kelasID = $siswaKelas->siswaKelasID;
+
+            // Ensure we only create records for 2 semesters per siswa_kelas
+            foreach (range(1, 2) as $semester) {
+                foreach ($mataPelajaranIDs as $mataPelajaranID) {
                     DB::table('mata_pelajaran_siswa')->insert([
                         'SiswasiswaID' => $siswaID,
                         'MataPelajaranmataPelajaranID' => $mataPelajaranID,
-                        'siswa_kelassiswaKelasID' => $siswaKelasID,
+                        'siswa_kelassiswaKelasID' => $kelasID, // Assign KelaskelasID
                         'nilaiPengetahuan' => $faker->randomFloat(2, 0, 100),
                         'predikatPengetahuan' => $faker->randomElement(['A', 'B', 'C', 'D', 'E']),
                         'deskripsiPengetahuan' => $faker->sentence(),
                         'nilaiKeterampilan' => $faker->randomFloat(2, 0, 100),
                         'predikatKeterampilan' => $faker->randomElement(['A', 'B', 'C', 'D', 'E']),
                         'deskripsiKeterampilan' => $faker->sentence(),
-                        'semester' => $faker->numberBetween(1, 2), // assuming 1 or 2 semesters
+                        'semester' => $semester,
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]);

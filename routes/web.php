@@ -8,12 +8,14 @@ use App\Http\Controllers\KesehatanController;
 use App\Http\Controllers\TempatTinggalController;
 use App\Http\Controllers\OrangTuaController;
 use App\Http\Controllers\WaliController;
+use App\Http\Controllers\SiswaKelasController;
+use App\Http\Controllers\KehadiranController;
+use App\Http\Controllers\MataPelajaranSiswaController;
 
 use App\Http\Controllers\EkstrakurikulerController;
-use App\Http\Controllers\KehadiranController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MataPelajaranController;
-use App\Http\Controllers\SiswaKelasController;
+
 use App\Http\Middleware\UserAccess;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -96,16 +98,28 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
     Route::put('wali/{waliaId}', [WaliController::class, 'update'])->name('wali.update');
 
     // Kelas
-    // Route::get('kelas/{siswaKelasID}/edit', [SiswaKelasController::class, 'edit'])->name('siswa_kelas.edit');
-    // Route::put('kelas/{siswaKelasID}', [SiswaKelasController::class, 'update'])->name('siswa_kelas.update');
+    Route::prefix('siswa/{siswaID}')->name('siswa.')->group(function() {
+        Route::get('kelas', [SiswaKelasController::class, 'editKelasIndex'])->name('kelas.index');
+        Route::get('kelas/{siswaKelasID}/edit', [SiswaKelasController::class, 'editKelas'])->name('kelas.edit');
+        Route::get('kelas/create', [SiswaKelasController::class, 'createKelas'])->name('kelas.create');
+        Route::post('kelas', [SiswaKelasController::class, 'storeKelas'])->name('kelas.store');
+        Route::put('kelas/{siswaKelasID}', [SiswaKelasController::class, 'updateKelas'])->name('kelas.update');
+        Route::delete('kelas/{siswaKelasID}', [SiswaKelasController::class, 'destroyKelas'])->name('kelas.destroy');
+    });
 
     // Kehadiran
     Route::get('kehadiran{kehadiranID}/edit', [KehadiranController::class, 'edit'])->name('kehadiran.edit');
     Route::put('kehadiran{kehadiranID}', [KehadiranController::class, 'update'])->name('kehadiran.update');
+
+    Route::prefix('siswa/{siswaID}')->name('siswa.')->group(function() {
+        Route::get('nilai', [MataPelajaranSiswaController::class, 'index'])->name('nilai.index');
+        Route::get('nilai/create', [MataPelajaranSiswaController::class, 'create'])->name('nilai.create');
+        Route::post('nilai', [MataPelajaranSiswaController::class, 'store'])->name('nilai.store');
+        Route::get('nilai/{mataPelajaranSiswaID}/edit', [MataPelajaranSiswaController::class, 'edit'])->name('nilai.edit');
+        Route::put('nilai/{mataPelajaranSiswaID}', [MataPelajaranSiswaController::class, 'update'])->name('nilai.update');
+        Route::delete('nilai/{mataPelajaranSiswaID}', [MataPelajaranSiswaController::class, 'destroy'])->name('nilai.destroy');
+    });
+
 });
-
-Route::get('kelas/{siswaKelasID}/edit', [SiswaKelasController::class, 'edit'])->name('siswa_kelas.edit');
-Route::put('kelas/{siswaKelasID}', [SiswaKelasController::class, 'update'])->name('siswa_kelas.update');
-
 
 

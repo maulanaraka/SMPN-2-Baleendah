@@ -22,6 +22,7 @@ class MataPelajaranSeeder extends Seeder
                 'deskripsiMataPelajaran' => $faker->sentence,
                 'KKMPengetahuan' => $faker->numberBetween(50, 80),
                 'KKMKeterampilan' => $faker->numberBetween(50, 80),
+                'tingkat' => $faker->numberBetween(1, 3),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

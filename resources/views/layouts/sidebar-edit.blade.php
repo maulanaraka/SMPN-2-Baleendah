@@ -80,7 +80,7 @@
                 id="pendidikan" 
                 class="transition-all duration-300 ease-in-out overflow-hidden max-h-0 bg-white rounded-md shadow-lg border border-gray-200"
             >
-                <a href="#" 
+                <a href="{{ route('kehadiran.edit', $siswa->siswaID) }}"
                 class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
                 Kehadiran
                 </a>

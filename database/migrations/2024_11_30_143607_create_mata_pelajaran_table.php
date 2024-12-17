@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('deskripsiMataPelajaran', 255);
             $table->integer('KKMPengetahuan');
             $table->integer('KKMKeterampilan');
+            $table->integer('tingkat');
             $table->timestamps();
         });
     }

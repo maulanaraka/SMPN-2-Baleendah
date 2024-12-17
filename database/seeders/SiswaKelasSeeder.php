@@ -20,32 +20,31 @@ class SiswaKelasSeeder extends Seeder
         $kelasIDs = DB::table('kelas')->pluck('kelasID')->toArray();
 
         foreach ($siswaIDs as $siswaID) {
-            $tahunStart = $faker->year;
-            $tahunEnd = $tahunStart + 1;
+            $tahunStart = $faker->year; // Starting academic year
+            $maxClasses = $faker->numberBetween(1, 4); // Randomly assign up to 4 class records
 
-            for ($i = 0; $i < 4; $i++) { // Allow up to 4 classes
+            for ($i = 0; $i < $maxClasses; $i++) {
+                // Generate random data
                 $kelasID = $faker->randomElement($kelasIDs);
+                $tanggalMasuk = $faker->dateTimeBetween("$tahunStart-07-01", "$tahunStart-12-31");
+                $tanggalKeluar = (clone $tanggalMasuk)->modify('+1 year')->format('Y-m-d');
+                $tahunEnd = $tahunStart + 1;
 
-                // Check if the combination already exists
-                $exists = DB::table('siswa_kelas')->where([
-                    ['SiswasiswaID', '=', $siswaID],
-                    ['KelaskelasID', '=', $kelasID],
-                    ['TahunAjaran', '=', "$tahunStart/$tahunEnd"],
-                ])->exists();
+                DB::table('siswa_kelas')->insert([
+                    'SiswasiswaID' => $siswaID,
+                    'KelaskelasID' => $kelasID,
+                    'TahunAjaran' => "$tahunStart/$tahunEnd",
+                    'tanggalMasuk' => $tanggalMasuk->format('Y-m-d'),
+                    'tanggalKeluar' => $faker->randomElement([null, $tanggalKeluar]),
+                    'status' => $faker->randomElement(['aktif', 'nonaktif']),
+                    'alasanPindah' => $faker->optional()->sentence(3),
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
 
-                if (!$exists) {
-                    DB::table('siswa_kelas')->insert([
-                        'TahunAjaran' => "$tahunStart/$tahunEnd",
-                        'SiswasiswaID' => $siswaID,
-                        'KelaskelasID' => $kelasID,
-                        'created_at' => now(),
-                        'updated_at' => now(),
-                    ]);
-                }
-
-                $tahunStart++; // Increment the year for the next record
+                // Increment the academic year for the next record
+                $tahunStart++;
             }
         }
     }
-
 }

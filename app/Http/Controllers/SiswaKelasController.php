@@ -48,18 +48,20 @@ class SiswaKelasController extends Controller
     public function edit($siswaID)
     {
         $siswa = Siswa::findOrFail($siswaID);
-        $siswaKelas = SiswaKelas::where('SiswasiswaID', $siswaID)->get();
+        $siswaKelas = SiswaKelas::where('SiswasiswaID', $siswaID)->first();
         $allKelas = Kelas::all(); // Fetch all kelas options
-        
+
+        if (!$siswaKelas) {
+            return back()->withErrors('Data siswa kelas tidak ditemukan.');
+        }
+
         return view('siswa.edit.kelas', compact('siswa', 'siswaKelas', 'allKelas'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, $siswaID)
     {
         $data = $request->validate([
+            'kelas' => 'required|array',
             'kelas.*.id' => 'required|exists:siswa_kelas,id',
             'kelas.*.TahunAjaran' => 'required|string',
             'kelas.*.KelaskelasID' => 'required|exists:kelas,kelasID',
@@ -72,7 +74,7 @@ class SiswaKelasController extends Controller
             ]);
         }
 
-        return back()->with('success', 'Data berhasil diperbarui!');
+        return redirect()->route('siswa.edit.kelas', $siswaID)->with('success', 'Data berhasil diperbarui!');
     }
 
     /**

@@ -12,10 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('siswa_kelas', function (Blueprint $table) {
-            $table->id(); // Single primary key
+            $table->increments('siswaKelasID'); // Single primary key
             $table->string('SiswasiswaID', 50);
             $table->unsignedInteger('KelaskelasID');
+
             $table->string('TahunAjaran');
+            $table->date('tanggalMasuk');
+            $table->date('tanggalKeluar')->nullable();
+            $table->enum('status',['aktif','nonaktif']);
+            $table->string('alasanPindah')->nullable();
             $table->timestamps();
         
             // Foreign keys
@@ -25,8 +30,7 @@ return new class extends Migration
                     ->onDelete('cascade');
             $table  ->foreign('KelaskelasID')
                     ->references('kelasID')
-                    ->on('kelas')
-                    ->onDelete('cascade');
+                    ->on('kelas');
         
             // Composite unique constraint
             // $table->unique(['SiswasiswaID', 'KelaskelasID']);
@@ -38,7 +42,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kelas_siswa');
+        Schema::dropIfExists('siswa_kelas');
     }
 };
 

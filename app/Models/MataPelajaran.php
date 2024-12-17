@@ -24,6 +24,7 @@ class MataPelajaran extends Model
         'deskripsiMataPelajaran',
         'KKMPengetahuan',
         'KKMKeterampilan',
+        'tingkat',
     ];
 
     // Cast attributes to native types

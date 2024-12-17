@@ -32,7 +32,7 @@ class Kelas extends Model
 
     public function siswaKelas()
     {
-        return $this->hasOne(siswaKelas::class, 'SiswasiswaID', 'siswaID');
+        return $this->hasOne(SiswaKelas::class, 'SiswasiswaID', 'siswaID');
     }
 }
 

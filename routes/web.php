@@ -10,6 +10,7 @@ use App\Http\Controllers\OrangTuaController;
 use App\Http\Controllers\WaliController;
 
 use App\Http\Controllers\EkstrakurikulerController;
+use App\Http\Controllers\KehadiranController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MataPelajaranController;
 use App\Http\Controllers\SiswaKelasController;
@@ -84,7 +85,7 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
 
     // Tempat Tinggal
     Route::get('tempat-tinggal/{tempatTinggalID}/edit', [TempatTinggalController::class, 'edit'])->name('tempat_tinggal.edit');
-    Route::put('tempat-tinggal{tempatTinggalID}', [TempatTinggalController::class, 'update'])->name('tempat_tinggal.update');
+    Route::put('tempat-tinggal/{tempatTinggalID}', [TempatTinggalController::class, 'update'])->name('tempat_tinggal.update');
 
     // Orang Tua
     Route::get('orang-tua/{orangTuaID}/edit', [OrangTuaController::class, 'edit'])->name('orang_tua.edit');
@@ -95,9 +96,16 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
     Route::put('wali/{waliaId}', [WaliController::class, 'update'])->name('wali.update');
 
     // Kelas
-    Route::get('kelas/{siswaKelasID}/edit', [SiswaKelasController::class, 'edit'])->name('siswa_kelas.edit');
-    Route::put('kelas/{siswaKelasID}', [SiswaKelasController::class, 'update'])->name('siswa_kelas.update');
+    // Route::get('kelas/{siswaKelasID}/edit', [SiswaKelasController::class, 'edit'])->name('siswa_kelas.edit');
+    // Route::put('kelas/{siswaKelasID}', [SiswaKelasController::class, 'update'])->name('siswa_kelas.update');
+
+    // Kehadiran
+    Route::get('kehadiran{kehadiranID}/edit', [KehadiranController::class, 'edit'])->name('kehadiran.edit');
+    Route::put('kehadiran{kehadiranID}', [KehadiranController::class, 'update'])->name('kehadiran.update');
 });
+
+Route::get('kelas/{siswaKelasID}/edit', [SiswaKelasController::class, 'edit'])->name('siswa_kelas.edit');
+Route::put('kelas/{siswaKelasID}', [SiswaKelasController::class, 'update'])->name('siswa_kelas.update');
 
 
 

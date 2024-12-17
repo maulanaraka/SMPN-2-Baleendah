@@ -9,31 +9,34 @@ class SiswaKelas extends Model
 {
     use HasFactory;
 
-    // Specify the table name if it's different from the model name
     protected $table = 'siswa_kelas';
+    protected $primaryKey = 'siswaKelasID';
+    public $timestamps = true; // Optional, defaults to true
 
-    // Use a single primary key
-    protected $primaryKey = 'id'; // Ensure your table has an 'id' column as the primary key
-
-    // Disable auto-increment if you're not using an auto-incrementing primary key
-    public $incrementing = true;
-
-    // Specify the fillable fields for mass assignment
     protected $fillable = [
-        'TahunAjaran',
         'SiswasiswaID',
         'KelaskelasID',
+        'TahunAjaran',
+        'tanggalMasuk',
+        'tanggalKeluar',
+        'status',
+        'alasanPindah',
     ];
 
-    // Define the relationship with the Siswa model
+    // Relationships
     public function siswa()
     {
         return $this->belongsTo(Siswa::class, 'SiswasiswaID', 'siswaID');
     }
 
-    // Define the relationship with the Kelas model
     public function kelas()
     {
         return $this->belongsTo(Kelas::class, 'KelaskelasID', 'kelasID');
     }
+
+    // Scopes
+    // public function scopeActive($query)
+    // {
+    //     return $query->where('status', 'aktif');
+    // }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kehadiran;
 use App\Models\Siswa;
+use App\Models\SiswaKelas;
 use Illuminate\Http\Request;
 
 class KehadiranController extends Controller
@@ -11,29 +12,31 @@ class KehadiranController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($siswaID)
     {
-        $kehadiran = Kehadiran::all(); // Fetch all attendance records
-        return view('kehadiran.index', compact('kehadiran'));
+        $siswa = Siswa::findOrFail($siswaID);
+        $kehadiran = Kehadiran::where('SiswasiswaID', $siswaID)->get();
+        $siswaKelas = SiswaKelas::where('SiswasiswaID', $siswaID)->get();
+        $siswaKelas = $siswaKelas->sortBy(function($kelas) {
+            return $kelas->kelas->kelasID ?? ''; // Sorting by kelasID
+        });
+        return view('siswa.edit.kehadiran.index', compact('siswa', 'kehadiran', 'siswaKelas'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($siswaID)
     {
-        return view('kehadiran.create');
+        return view('siswa.edit.kehadiran.create', compact('siswaID'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $siswaID)
     {
         $request->validate([
-            // 'SiswasiswaID' => 'required|string|max:50',
-            // 'kelas' => 'required|string|max:10',
-            // 'semester' => 'required|integer',
             'jumlahHadir' => 'required|integer',
             'presentaseHadir' => 'required|numeric',
             'sakit' => 'required|integer',
@@ -43,32 +46,29 @@ class KehadiranController extends Controller
             'jumlahHariBelajarEfektif' => 'required|integer',
         ]);
 
-        // Create Kehadiran record
-        Kehadiran::create($request->all());
+        Kehadiran::create([
+            'SiswasiswaID' => $siswaID,
+            ...$request->all(),
+        ]);
 
-        return redirect()->route('kehadiran.index')->with('success', 'Kehadiran created successfully.');
+        return redirect()->route('kehadiran.index', $siswaID)->with('success', 'Kehadiran created successfully.');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($siswaID)
+    public function edit($siswaID, $kehadiranID)
     {
-        $siswa = Siswa::findOrFail($siswaID); // Ensure the siswa exists
-        $kehadiran = Kehadiran::where('SiswasiswaID', $siswaID)->firstOrFail(); // Find the kehadiran data for this siswa
-    
-        return view('siswa.edit.kehadiran', compact('siswa','kehadiran'));
+        $kehadiran = Kehadiran::findOrFail($kehadiranID);
+        return view('siswa.edit.kehadiran.edit', compact('kehadiran', 'siswaID'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $siswaID)
+    public function update(Request $request, $siswaID, $kehadiranID)
     {
         $request->validate([
-            // 'SiswasiswaID' => 'required|string|max:50',
-            // 'kelas' => 'required|string|max:10',
-            // 'semester' => 'required|integer',
             'jumlahHadir' => 'required|integer',
             'presentaseHadir' => 'required|numeric',
             'sakit' => 'required|integer',
@@ -78,19 +78,30 @@ class KehadiranController extends Controller
             'jumlahHariBelajarEfektif' => 'required|integer',
         ]);
 
-        // Find and update Kehadiran record
-        $kehadiran = Kehadiran::where('SiswasiswaID', $siswaID)->firstOrFail();
+        $kehadiran = Kehadiran::findOrFail($kehadiranID);
         $kehadiran->update($request->all());
 
-        return back()->with('success', 'Data berhasil diperbarui!');
+        return redirect()->route('kehadiran.index', $siswaID)->with('success', 'Kehadiran updated successfully.');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show($siswaID, $kehadiranID)
+    {
+        $kehadiran = Kehadiran::findOrFail($kehadiranID);
+        return view('siswa.edit.kehadiran.show', compact('kehadiran', 'siswaID'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Kehadiran $kehadiran)
+    public function destroy($siswaID, $kehadiranID)
     {
+        $kehadiran = Kehadiran::findOrFail($kehadiranID);
         $kehadiran->delete();
-        return redirect()->route('kehadiran.index')->with('success', 'Kehadiran deleted successfully.');
+
+        return redirect()->route('kehadiran.index', $siswaID)->with('success', 'Kehadiran deleted successfully.');
     }
 }
+

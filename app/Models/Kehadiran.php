@@ -17,22 +17,25 @@ class Kehadiran extends Model
     // Fillable fields for mass assignment
     protected $fillable = [
         'SiswasiswaID',
-        'kelas',
+        'siswa_kelassiswaKelasID',
         'semester',
         'jumlahHadir',
         'presentaseHadir',
         'sakit',
         'izin',
         'alpa',
-        'jumlahTidakHadir',
         'presentaseTidakHadir',
-        'jumlahHariBelajarEfektif',
+        'jumlahHariBelajarEfektif'
     ];
 
     // Relationship with Siswa
     public function siswa()
     {
         return $this->belongsTo(Siswa::class, 'SiswasiswaID', 'siswaID');
+    }
+    public function siswa_kelas()
+    {
+        return $this->belongsTo(SiswaKelas::class, 'siswa_kelassiswaKelasID', 'siswaKelasID');
     }
 
     /**

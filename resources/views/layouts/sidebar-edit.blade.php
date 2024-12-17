@@ -61,7 +61,7 @@
                 class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
                 Kelas
             </a>
-                <a href="{{ route('kehadiran.edit', $siswa->siswaID) }}"
+                <a href="{{ route('siswa.kehadiran.index', $siswa->siswaID) }}"
                 class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
                 Kehadiran
                 </a>

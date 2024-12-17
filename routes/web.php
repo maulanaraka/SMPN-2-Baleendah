@@ -108,8 +108,17 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
     });
 
     // Kehadiran
-    Route::get('kehadiran{kehadiranID}/edit', [KehadiranController::class, 'edit'])->name('kehadiran.edit');
-    Route::put('kehadiran{kehadiranID}', [KehadiranController::class, 'update'])->name('kehadiran.update');
+    Route::prefix('siswa/{siswaID}')->name('siswa.')->group(function () {
+        Route::prefix('kehadiran')->group(function () {
+            Route::get('/', [KehadiranController::class, 'index'])->name('kehadiran.index');
+            Route::get('create', [KehadiranController::class, 'create'])->name('kehadiran.create');
+            Route::post('/', [KehadiranController::class, 'store'])->name('kehadiran.store');
+            Route::get('{kehadiranID}/edit', [KehadiranController::class, 'edit'])->name('kehadiran.edit');
+            Route::put('{kehadiranID}', [KehadiranController::class, 'update'])->name('kehadiran.update');
+            Route::get('{kehadiranID}', [KehadiranController::class, 'show'])->name('kehadiran.show');
+            Route::delete('{kehadiranID}', [KehadiranController::class, 'destroy'])->name('kehadiran.destroy');
+        });
+    });
 
     Route::prefix('siswa/{siswaID}')->name('siswa.')->group(function() {
         Route::get('nilai', [MataPelajaranSiswaController::class, 'index'])->name('nilai.index');

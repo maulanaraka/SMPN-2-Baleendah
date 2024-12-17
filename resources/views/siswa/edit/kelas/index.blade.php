@@ -12,8 +12,6 @@
     <div class="container">
         <h1>Data Kelas</h1>
 
-        {{-- Button for adding a new class --}}
-        {{-- Uncomment the line below if you want to add a "Tambah Kelas" button --}}
         <a href="{{ route('siswa.kelas.create', $siswa->siswaID) }}" class="btn btn-primary mb-3">Tambah Kelas</a>
 
         <table class="table mt-4">

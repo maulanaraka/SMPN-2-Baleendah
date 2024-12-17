@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('kehadiran', function (Blueprint $table) {
             $table->increments('kehadiranID');
             $table->string('SiswasiswaID', 50);
+            $table->unsignedInteger('siswa_kelassiswaKelasID');
 
-            $table->string('kelas', 10); 
             $table->integer('semester'); 
             $table->integer('jumlahHadir');
             $table->float('presentaseHadir');
@@ -30,6 +30,10 @@ return new class extends Migration
             $table  ->foreign('SiswasiswaID')
                     ->references('siswaID')
                     ->on('siswa')
+                    ->onDelete('cascade');
+            $table  ->foreign('siswa_kelassiswaKelasID')
+                    ->references('siswaKelasID')
+                    ->on('siswa_kelas')
                     ->onDelete('cascade');
         });
     }

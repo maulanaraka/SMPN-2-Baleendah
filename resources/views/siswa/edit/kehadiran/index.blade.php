@@ -23,27 +23,33 @@
         </tr>
     </thead>
     <tbody>
-        @forelse ($siswaKelas as $kelas)
-        @foreach ($kehadiran as $item)
-            <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $kelas->kelas->kelasID }}</td>
-                <td>{{ $item->semester }}</td>
-                <td>{{ $item->jumlahHadir }}</td>
-                <td>{{ $item->presentaseHadir }}%</td>
-                <td>
-                    <a href="{{ route('siswa.kehadiran.edit', [$siswa->siswaID, $item->kehadiranID]) }}" class="btn btn-warning">Edit</a>
-                    <a href="{{ route('siswa.kehadiran.show', [$siswa->siswaID, $item->kehadiranID]) }}" class="btn btn-info">Show</a>
-                    <form action="{{ route('siswa.kehadiran.destroy', [$siswa->siswaID, $item->kehadiranID]) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </td>
-            </tr>
+        @php
+            $counter = 1; // Initialize the counter variable
+        @endphp
+        @foreach ($siswaKelas as $kelas)
+            @php
+                // Get the kehadiran records for this siswa_kelassiswaKelasID
+                $kelasKehadiran = $kehadiran->where('siswa_kelassiswaKelasID', $kelas->siswaKelasID);
+            @endphp
+            @foreach ($kelasKehadiran as $item)
+                <tr>
+                    <td>{{ $counter++ }}</td> <!-- Use the global counter variable -->
+                    <td>{{ $kelas->kelas->kelasID }}</td>
+                    <td>{{ $item->semester }}</td>
+                    <td>{{ $item->jumlahHadir }}</td>
+                    <td>{{ $item->presentaseHadir }}%</td>
+                    <td>
+                        <a href="{{ route('siswa.kehadiran.edit', [$siswa->siswaID, $item->kehadiranID]) }}" class="btn btn-warning">Edit</a>
+                        <a href="{{ route('siswa.kehadiran.show', [$siswa->siswaID, $item->kehadiranID]) }}" class="btn btn-info">Show</a>
+                        <form action="{{ route('siswa.kehadiran.destroy', [$siswa->siswaID, $item->kehadiranID]) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
         @endforeach
-        @empty
-        @endforelse
     </tbody>
 </table>
 @endsection

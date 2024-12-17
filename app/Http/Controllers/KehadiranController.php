@@ -14,13 +14,17 @@ class KehadiranController extends Controller
      */
     public function index($siswaID)
     {
-        $siswa = Siswa::findOrFail($siswaID);
-        $kehadiran = Kehadiran::where('SiswasiswaID', $siswaID)->get();
-        $siswaKelas = SiswaKelas::where('SiswasiswaID', $siswaID)->get();
-        $siswaKelas = $siswaKelas->sortBy(function($kelas) {
-            return $kelas->kelas->kelasID ?? ''; // Sorting by kelasID
-        });
-        return view('siswa.edit.kehadiran.index', compact('siswa', 'kehadiran', 'siswaKelas'));
+        // Retrieve the siswa record
+    $siswa = Siswa::findOrFail($siswaID);
+    
+    // Get all siswaKelas related to the siswa
+    $siswaKelas = SiswaKelas::where('siswaID', $siswaID)->get();
+    
+    // Get all kehadiran records and group them by siswa_kelassiswaKelasID
+    $kehadiran = Kehadiran::whereIn('siswa_kelassiswaKelasID', $siswaKelas->pluck('siswaKelasID'))->get();
+    
+    // Pass the data to the view
+    return view('siswa.kehadiran.index', compact('siswa', 'siswaKelas', 'kehadiran'));
     }
 
     /**

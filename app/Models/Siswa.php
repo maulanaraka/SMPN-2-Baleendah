@@ -48,5 +48,9 @@ class Siswa extends Model
     {
         return $this->hasOne(wali::class, 'SiswasiswaID', 'siswaID');
     }
+    public function siswaKelas()
+    {
+        return $this->hasOne(SiswaKelas::class, 'SiswasiswaID', 'siswaID');
+    }
 
 }

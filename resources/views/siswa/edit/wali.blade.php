@@ -14,7 +14,7 @@
     <a href="{{ route('orang_tua.edit', $siswa->siswaID) }}" 
         class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
         Orang Tua
-        </a>
+    </a>
     <!-- Edit Wali -->
     <form action="{{ route('wali.update', $siswa->siswaID) }}" method="POST">
         @csrf

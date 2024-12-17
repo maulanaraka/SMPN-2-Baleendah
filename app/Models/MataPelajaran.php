@@ -24,6 +24,7 @@ class MataPelajaran extends Model
         'deskripsiMataPelajaran',
         'KKMPengetahuan',
         'KKMKeterampilan',
+        'tingkat',
     ];
 
     // Cast attributes to native types
@@ -31,6 +32,11 @@ class MataPelajaran extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    public function siswaMataPelajaran()
+    {
+        return $this->hasMany(MataPelajaranSiswa::class, 'MataPelajaranmataPelajaranID', 'mataPelajaranID');
+    }    
 
     // Optional relationships (e.g., if mata_pelajaran has students or classes)
     // public function classes()

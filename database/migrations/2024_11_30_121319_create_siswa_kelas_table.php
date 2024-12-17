@@ -12,26 +12,26 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('siswa_kelas', function (Blueprint $table) {
-            // Foreign keys without auto-incrementing IDs
+            $table->increments('siswaKelasID');
             $table->string('SiswasiswaID', 50);
-            $table->unsignedInteger('KelaskelasID');
+            $table->string('KelaskelasID', 50); // Change to match the primary key in kelas
             $table->string('TahunAjaran');
+            $table->date('tanggalMasuk');
+            $table->date('tanggalKeluar')->nullable();
+            $table->enum('status', ['aktif', 'nonaktif']);
+            $table->string('alasanPindah')->nullable();
             $table->timestamps();
         
-            // Foreign keys with cascade on delete
+            // Foreign keys
             $table  ->foreign('SiswasiswaID')
                     ->references('siswaID')
                     ->on('siswa')
                     ->onDelete('cascade');
-
             $table  ->foreign('KelaskelasID')
                     ->references('kelasID')
-                    ->on('kelas')
-                    ->onDelete('cascade');
-            
-            // Composite primary key for the pivot table
-            $table->primary(['SiswasiswaID', 'KelaskelasID']);
-        });        
+                    ->on('kelas');
+        });
+        
     }
 
     /**
@@ -39,7 +39,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kelas_siswa');
+        Schema::dropIfExists('siswa_kelas');
     }
 };
 

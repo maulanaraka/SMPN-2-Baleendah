@@ -12,15 +12,13 @@ class Kelas extends Model
     // Table name (optional if it follows Laravel's naming convention)
     protected $table = 'kelas';
 
-    // The primary key field
+    // Primary key
     protected $primaryKey = 'kelasID';
-
-    // Disable incrementing for non-integer primary keys
-    public $incrementing = true;
+    public $incrementing = false;
 
     // Define fillable fields
     protected $fillable = [
-        'kelas',
+        'kelasID',
         'tingkat',
     ];
 
@@ -30,11 +28,12 @@ class Kelas extends Model
         'updated_at' => 'datetime',
     ];
 
-    // Optional relationships (e.g., if a class has students)
-    // public function students()
-    // {
-    //     return $this->hasMany(Student::class);
-    // }
+    // Relationships
+    public function siswaKelas()
+    {
+        return $this->hasMany(SiswaKelas::class, 'KelaskelasID', 'kelasID');
+    }
 }
+
 
 

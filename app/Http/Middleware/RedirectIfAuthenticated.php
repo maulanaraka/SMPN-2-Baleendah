@@ -15,25 +15,18 @@ class RedirectIfAuthenticated
      * @param  \Closure  $next
      * @return mixed
      */
+    // RedirectIfAuthenticated
     public function handle(Request $request, Closure $next)
     {
-        // Check if the user is authenticated
-        if (Auth::check()) {
-            $user = Auth::user();
-
-            // Redirect based on the user's role
-            switch ($user->role) {
-                case 'admin':
-                    return redirect()->route('admin'); // Adjust to your admin route
-                case 'operator':
-                    return redirect()->route('operator'); // Adjust to your operator route
-                case 'staff':
-                    return redirect()->route('staff'); // Adjust to your staff route
-                default:
-                    return redirect('/'); // Default route if role is not matched
-            }
+        if (Auth::check() && Auth::user()?->role) {
+            return match (Auth::user()->role) {
+                'admin' => redirect()->route('admin'),
+                'operator' => redirect()->route('operator'),
+                'staff' => redirect()->route('staff'),
+                default => redirect('/')->withErrors('Invalid role.'),
+            };
         }
-
         return $next($request);
     }
+
 }

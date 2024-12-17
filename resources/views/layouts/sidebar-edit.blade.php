@@ -45,29 +45,6 @@
             </div>
         </div>
 
-        <!-- Dropdown: Kelas -->
-        <div class="relative">
-            <button 
-                class="w-full bg-gray-100 text-gray-900 px-4 py-2 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-400"
-                onclick="toggleDropdown('kelas')"
-            >
-                Kelas
-            </button>
-            <div 
-                id="kelas" 
-                class="transition-all duration-300 ease-in-out overflow-hidden max-h-0 bg-white rounded-md shadow-lg border border-gray-200"
-            >
-                <a href="#" 
-                    class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
-                    Kelas
-                </a>
-                <a href="#" 
-                    class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
-                    Pindah Kelas
-                </a>
-            </div>
-        </div>
-
         <!-- Dropdown: Pendidikan -->
         <div class="relative">
             <button 
@@ -80,12 +57,16 @@
                 id="pendidikan" 
                 class="transition-all duration-300 ease-in-out overflow-hidden max-h-0 bg-white rounded-md shadow-lg border border-gray-200"
             >
-                <a href="#" 
-                    class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
-                    Kehadiran
+            <a href="{{ route('siswa.kelas.index', $siswa->siswaID) }}"
+                class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                Kelas
+            </a>
+                <a href="{{ route('kehadiran.edit', $siswa->siswaID) }}"
+                class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                Kehadiran
                 </a>
-                <a href="#" 
-                    class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
+                <a href="{{ route('siswa.nilai.index', $siswa->siswaID) }}"
+                class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
                     Nilai Siswa
                 </a>
                 <a href="#" 
@@ -159,7 +140,7 @@
         }
         </script>
 
-    <!-- Logout Form -->
+    <!-- Back Form -->
     <div class="absolute bottom-0 left-0 w-full p-4 bg-white shadow">
         <a href="{{ route('data-siswa') }}" class="bg-gray-500 text-white px-4 py-2 rounded">Back</a>
     </div>

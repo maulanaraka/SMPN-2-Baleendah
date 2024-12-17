@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('siswa_ekstrakurikuler', function (Blueprint $table) {
+            $table->increments('siswaEkstrakurikulerID');
             $table->string('SiswasiswaID', 50);
             $table->unsignedInteger('EkstrakurikulerekstrakurikulerID');
             
@@ -27,11 +28,9 @@ return new class extends Migration
                     ->onDelete('cascade');
             $table  ->foreign('EkstrakurikulerekstrakurikulerID')
                     ->references('ekstrakurikulerID')
-                    ->on('ekstrakurikuler')
-                    ->onDelete('cascade');
+                    ->on('ekstrakurikuler');
 
             // Composite primary key for the pivot table
-            $table->primary(['SiswasiswaID', 'EkstrakurikulerekstrakurikulerID']);
         });        
     }
 

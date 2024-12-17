@@ -12,16 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('mata_pelajaran_siswa', function (Blueprint $table) {
+            $table->increments('mataPelajaranSiswaID');
             $table->string('SiswasiswaID', 50);
             $table->unsignedInteger('MataPelajaranmataPelajaranID');
+            $table->unsignedInteger('siswa_kelassiswaKelasID');
 
             $table->float('nilaiPengetahuan');
             $table->string('predikatPengetahuan', 5);
-            $table->string('deskripsiPengetahuan', 255);
+            $table->string('deskripsiPengetahuan', 500)->nullable();
             
             $table->float('nilaiKeterampilan');
             $table->string('predikatKeterampilan', 5);
-            $table->string('deskripsiKeterampilan', 255);
+            $table->string('deskripsiKeterampilan', 500)->nullable();
             
             $table->integer('semester');
             $table->timestamps();
@@ -33,11 +35,14 @@ return new class extends Migration
                     ->onDelete('cascade');
             $table  ->foreign('MataPelajaranmataPelajaranID')
                     ->references('mataPelajaranID')
-                    ->on('mata_pelajaran')
+                    ->on('mata_pelajaran');
+            $table  ->foreign('siswa_kelassiswaKelasID')
+                    ->references('siswaKelasID')
+                    ->on('siswa_kelas')
                     ->onDelete('cascade');
             
             // Composite primary key for the pivot table
-            $table->primary(['SiswasiswaID', 'MataPelajaranmataPelajaranID']);
+            // $table->primary(['SiswasiswaID', 'MataPelajaranmataPelajaranID']);
         });
     }
 

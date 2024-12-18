@@ -24,16 +24,16 @@
     </thead>
     <tbody>
         @php
-            $counter = 1; // Initialize the counter variable
+            $counter = 1; // Initialize counter variable
         @endphp
         @foreach ($siswaKelas as $kelas)
             @php
-                // Get the kehadiran records for this siswa_kelassiswaKelasID
+                // Get kehadiran records for siswa_kelassiswaKelasID
                 $kelasKehadiran = $kehadiran->where('siswa_kelassiswaKelasID', $kelas->siswaKelasID);
             @endphp
             @foreach ($kelasKehadiran as $item)
                 <tr>
-                    <td>{{ $counter++ }}</td> <!-- Use the global counter variable -->
+                    <td>{{ $counter++ }}</td> <!-- global counter variable -->
                     <td>{{ $kelas->kelas->kelasID }}</td>
                     <td>{{ $item->semester }}</td>
                     <td>{{ $item->jumlahHadir }}</td>

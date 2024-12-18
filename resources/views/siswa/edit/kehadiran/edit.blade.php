@@ -3,7 +3,7 @@
 @section('content')
 <h1>Edit Kehadiran Siswa</h1>
 
-<form action="{{ route('kehadiran.update', [$siswaID, $kehadiran->kehadiranID]) }}" method="POST">
+<form action="{{ route('siswa.kehadiran.update', [$siswaID, $kehadiran->kehadiranID]) }}" method="POST">
     @csrf
     @method('PUT')
     

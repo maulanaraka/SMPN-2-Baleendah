@@ -18,13 +18,13 @@ class KehadiranController extends Controller
     $siswa = Siswa::findOrFail($siswaID);
     
     // Get all siswaKelas related to the siswa
-    $siswaKelas = SiswaKelas::where('siswaID', $siswaID)->get();
+    $siswaKelas = SiswaKelas::where('SiswasiswaID', $siswaID)->get();
     
     // Get all kehadiran records and group them by siswa_kelassiswaKelasID
     $kehadiran = Kehadiran::whereIn('siswa_kelassiswaKelasID', $siswaKelas->pluck('siswaKelasID'))->get();
     
     // Pass the data to the view
-    return view('siswa.kehadiran.index', compact('siswa', 'siswaKelas', 'kehadiran'));
+    return view('siswa.edit.kehadiran.index', compact('siswa', 'siswaKelas', 'kehadiran'));
     }
 
     /**

@@ -55,7 +55,7 @@ class KehadiranController extends Controller
             ...$request->all(),
         ]);
 
-        return redirect()->route('kehadiran.index', $siswaID)->with('success', 'Kehadiran created successfully.');
+        return redirect()->route('siswa.kehadiran.index', $siswaID)->with('success', 'Kehadiran created successfully.');
     }
 
     /**
@@ -63,8 +63,9 @@ class KehadiranController extends Controller
      */
     public function edit($siswaID, $kehadiranID)
     {
+        $siswa = Siswa::findOrFail($siswaID);
         $kehadiran = Kehadiran::findOrFail($kehadiranID);
-        return view('siswa.edit.kehadiran.edit', compact('kehadiran', 'siswaID'));
+        return view('siswa.edit.kehadiran.edit', compact('kehadiran', 'siswaID', 'siswa'));
     }
 
     /**
@@ -85,7 +86,7 @@ class KehadiranController extends Controller
         $kehadiran = Kehadiran::findOrFail($kehadiranID);
         $kehadiran->update($request->all());
 
-        return redirect()->route('kehadiran.index', $siswaID)->with('success', 'Kehadiran updated successfully.');
+        return redirect()->route('siswa.kehadiran.index', $siswaID)->with('success', 'Kehadiran updated successfully.');
     }
 
     /**
@@ -105,7 +106,7 @@ class KehadiranController extends Controller
         $kehadiran = Kehadiran::findOrFail($kehadiranID);
         $kehadiran->delete();
 
-        return redirect()->route('kehadiran.index', $siswaID)->with('success', 'Kehadiran deleted successfully.');
+        return back()->with('success', 'Kehadiran deleted successfully.');
     }
 }
 

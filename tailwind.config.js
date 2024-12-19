@@ -12,9 +12,11 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                'Inter': ["'Inter'", 'sans-serif'],
             },
         },
     },
-    plugins: [],
+    plugins: [
+        require('flowbite/plugin')
+    ],
 };

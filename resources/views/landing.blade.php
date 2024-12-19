@@ -1,70 +1,57 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('Buku Induk Siswa', 'Landing Page') <!-- Optional: Set the title for this page -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BUKIS - Buku Induk Siswa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0em;
+        }
+    </style>
+</head>
 
-@section('public')
-<body class="bg-gray-50">
-
-    <!-- Navigation Bar -->
-    <nav class="bg-blue-600 p-4">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="text-white font-bold text-lg">Buku Induk</div>
-            <ul class="flex space-x-6 text-white">
-                <li><a href="#home" class="hover:text-gray-200">Home</a></li>
-                <li><a href="#features" class="hover:text-gray-200">Features</a></li>
-                <li><a href="#contact" class="hover:text-gray-200">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="home" class="h-screen bg-cover bg-center relative" style="background-image: url('https://via.placeholder.com/1500');">
-        <div class="absolute inset-0 bg-black opacity-50"></div>
-        <div class="relative z-10 max-w-7xl mx-auto px-4 py-32 text-center text-white">
-            <h1 class="text-5xl font-bold mb-4">Welcome to Buku induk</h1>
-            <p class="text-xl mb-8">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel cupiditate, obcaecati.</p>
-            <a href="#features" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded-lg text-xl">Learn More</a>
-            <!-- Login Button -->
-            <a href="{{ route('login') }}" class="bg-green-600 hover:bg-green-700 text-white py-2 px-6 rounded-lg text-xl mt-4 inline-block">Login</a>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section id="features" class="py-20 bg-gray-100">
-        <div class="max-w-7xl mx-auto text-center">
-            <h2 class="text-4xl font-semibold mb-12">Our Features</h2>
-            <div class="grid md:grid-cols-3 gap-12">
-                <div class="p-6 bg-white rounded-lg shadow-md">
-                    <h3 class="text-2xl font-semibold mb-4">Feature One</h3>
-                    <p class="text-lg text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+<body class="h-screen bg-cover bg-center" style="background-image: url('https://cdn.wallpapersafari.com/84/52/VvHazk.jpg');">
+    <nav class="bg-transparent fixed w-full backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0 flex items-center">
+                    <img src="{{ asset('img/Logo BUKIS.png') }}" alt="Logo BUKIS" class="h-8 w-10 mr-5">
+                    <a href="#" class="text-white text-2xl font-bold">BUKIS</a>
                 </div>
-                <div class="p-6 bg-white rounded-lg shadow-md">
-                    <h3 class="text-2xl font-semibold mb-4">Feature Two</h3>
-                    <p class="text-lg text-gray-700">Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus.</p>
-                </div>
-                <div class="p-6 bg-white rounded-lg shadow-md">
-                    <h3 class="text-2xl font-semibold mb-4">Feature Three</h3>
-                    <p class="text-lg text-gray-700">Sed ut perspiciatis unde omnis iste natus error sit voluptatem.</p>
+                <div>
+                    <a href="/login" class="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg shadow-md hover:bg-blue-700 transition">Masuk</a>
                 </div>
             </div>
         </div>
+    </nav>
+
+    <div class="h-full flex items-center justify-start">
+        <div class="w-full max-w-2xl mx-auto text-left">
+            <h1 class="text-4xl md:text-5xl font-regular text-white leading-tight">Selamat Datang Di Website</h1>
+            <h2 class="text-4xl md:text-5xl font-bold text-white mt-6">Buku Induk Siswa</h2>
+            <p class="text-4xl md:text-5xl font-regular text-white mt-6">SMPN 2 Baleendah</p>
+
+            <div class="mt-8">
+                <a href="/login" class="px-6 py-3 bg-blue-600 text-white font-bold rounded-lg shadow-md hover:bg-blue-700 transition">Mulai</a>
+            </div>
+        </div>
+    </div>
+
+    <section class="h-screen bg-gradient-to-b from-green-600 to-gray-200 flex flex-col items-center justify-center">
+        <h2 class="text-4xl md:text-5xl font-regular text-white mb-6">Tujuan <span class="text-4xl md:text-5xl font-bold text-white">Website</span> ini dibuat</h2>
+        <div class="w-4/5 md:w-2/3 bg-gray-200 rounded-lg h-64 mb-4"></div>
+        <p class="text-center text-gray-700 text-lg md:text-xl max-w-2xl">Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</p>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-blue-600 text-white">
-        <div class="max-w-7xl mx-auto text-center">
-            <h2 class="text-4xl font-semibold mb-8">Get in Touch</h2>
-            <p class="text-xl mb-8">Have questions? Feel free to reach out to us!</p>
-            <a href="mailto:contact@benzena.com" class="bg-white hover:bg-gray-100 text-blue-600 py-2 px-6 rounded-lg text-xl">Contact Us</a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-6">
-        <div class="max-w-7xl mx-auto text-center">
-            <p>&copy; 2024 Benzena. All rights reserved.</p>
-        </div>
-    </footer>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.js"></script>
 </body>
-@endsection
+
+</html>

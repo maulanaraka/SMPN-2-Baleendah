@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SessionController;
-
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\KesehatanController;
 use App\Http\Controllers\TempatTinggalController;
@@ -27,6 +27,10 @@ Route::middleware('guest')->group(function () {
     Route::get('/login', [SessionController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [SessionController::class, 'login']);
 });
+
+// Register routes
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
 
 // Logout route
 Route::post('/logout', [SessionController::class, 'logout'])->name('logout')->middleware('auth');

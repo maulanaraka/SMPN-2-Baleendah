@@ -9,57 +9,59 @@
     </div>
 @endif
 
-<div class="w-full h-auto bg-white rounded-lg shadow p-6">
-    <h1 class="text-2xl font-semibold mb-6">Tambah Kelas untuk {{ $siswa->namaLengkap }}</h1>
+<div class="p-4 sm:ml-60 min-h-screen">
+    <div class="p-2">
+        <h1 class="text-2xl font-semibold mt-10 mb-4">Tambah Kelas untuk {{ $siswa->namaLengkap }}</h1>
 
-    <form action="{{ route('siswa.kelas.store', $siswa->siswaID) }}" method="POST">
-        @csrf
+        <form action="{{ route('siswa.kelas.store', $siswa->siswaID) }}" method="POST">
+            @csrf
 
-        <div class="mb-4">
-            <label for="KelaskelasID" class="block font-medium">Kelas</label>
-            <select name="KelaskelasID" id="KelaskelasID" class="w-full px-4 py-2 border border-gray-300 rounded-lg" required>
-                <option value="" disabled selected>Pilih Kelas</option> <!-- Default empty option -->
-                @foreach ($kelasList as $k)
-                    <option value="{{ $k->kelasID }}">{{ $k->kelasID }}</option>
-                @endforeach
-            </select>
-        </div>        
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div>
+                    <label for="KelaskelasID" class="block mb-2 text-sm font-medium text-gray-900">Kelas</label>
+                    <select name="KelaskelasID" id="KelaskelasID" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                        <option value="" disabled selected>Pilih Kelas</option>
+                        @foreach ($kelasList as $k)
+                            <option value="{{ $k->kelasID }}">{{ $k->kelasID }}</option>
+                        @endforeach
+                    </select>
+                </div>
 
-        <div class="mb-4">
-            <label for="TahunAjaran" class="block font-medium">Tahun Ajaran</label>
-            <input type="text" name="TahunAjaran" id="TahunAjaran" class="w-full px-4 py-2 border border-gray-300 rounded-lg" required>
-        </div>
+                <div>
+                    <label for="TahunAjaran" class="block mb-2 text-sm font-medium text-gray-900">Tahun Ajaran</label>
+                    <input type="text" name="TahunAjaran" id="TahunAjaran" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                </div>
 
-        <div class="mb-4">
-            <label for="status" class="block font-medium">Status</label>
-            <select name="status" id="status" class="w-full px-4 py-2 border border-gray-300 rounded-lg" required>
-                <option value="aktif">Aktif</option>
-                <option value="nonaktif">Nonaktif</option>
-            </select>
-        </div>
+                <div>
+                    <label for="status" class="block mb-2 text-sm font-medium text-gray-900">Status</label>
+                    <select name="status" id="status" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                        <option value="aktif">Aktif</option>
+                        <option value="nonaktif">Nonaktif</option>
+                    </select>
+                </div>
 
-        <div class="mb-4">
-            <label for="tanggalMasuk" class="block font-medium">Tanggal Masuk</label>
-            <input type="date" name="tanggalMasuk" id="tanggalMasuk" class="w-full px-4 py-2 border border-gray-300 rounded-lg" required>
-        </div>
+                <div>
+                    <label for="tanggalMasuk" class="block mb-2 text-sm font-medium text-gray-900">Tanggal Masuk</label>
+                    <input type="date" name="tanggalMasuk" id="tanggalMasuk" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                </div>
 
-        <div class="mb-4">
-            <label for="tanggalKeluar" class="block font-medium">Tanggal Keluar</label>
-            <input type="date" name="tanggalKeluar" id="tanggalKeluar" class="w-full px-4 py-2 border border-gray-300 rounded-lg" placeholder="Tanggal Keluar">
-        </div>
+                <div>
+                    <label for="tanggalKeluar" class="block mb-2 text-sm font-medium text-gray-900">Tanggal Keluar</label>
+                    <input type="date" name="tanggalKeluar" id="tanggalKeluar" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Tanggal Keluar">
+                </div>
 
-        <div class="mb-4">
-            <label for="alasanPindah" class="block font-medium">Alasan Pindah</label>
-            <textarea name="alasanPindah" id="alasanPindah" class="w-full px-4 py-2 border border-gray-300 rounded-lg" placeholder="Masukkan alasan pindah"></textarea>
-        </div>
+                <div>
+                    <label for="alasanPindah" class="block mb-2 text-sm font-medium text-gray-900">Alasan Pindah</label>
+                    <textarea name="alasanPindah" id="alasanPindah" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Masukkan alasan pindah"></textarea>
+                </div>
+            </div>
 
-        <div class="flex justify-between mt-6">
-            <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">Tambah Kelas</button>
-            <a href="{{ route('siswa.kelas.index', $siswa->siswaID) }}" class="bg-red-500 text-white px-6 py-2 rounded hover:bg-red-600">
-                Cancel
-            </a>
-        </div>
-    </form>
+            <div class="mt-6 flex justify-between">
+                <button type="submit" class="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700">Tambah Kelas</button>
+                <a href="{{ route('siswa.kelas.index', $siswa->siswaID) }}" class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600">Cancel</a>
+            </div>
+        </form>
+    </div>
 </div>
 
 @endsection

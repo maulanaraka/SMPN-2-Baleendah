@@ -22,7 +22,9 @@ class WaliController extends Controller
      */
     public function create()
     {
-        //
+        $siswa = new Siswa();
+        $wali = new Wali();
+        return view('siswa.input.wali', compact('siswa', 'wali'));
     }
 
     /**
@@ -30,7 +32,22 @@ class WaliController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'namaWali' => 'nullable|string|max:255',
+            'nomorTeleponWali' => 'nullable|string|max:25',
+            'tempatLahirWali' => 'nullable|string|max:50',
+            'tanggalLahirWali' => 'nullable|date',
+            'kewarganegaraanWali' => 'nullable|string|max:50',
+            'pendidikanTertinggiWali' => 'nullable|string|max:25',
+            'pekerjaanWali' => 'nullable|string|max:50',
+            'penghasilanWali' => 'nullable|numeric',
+            'alamatWali' => 'nullable|string|max:255',
+            'hubunganDenganSiswa' => 'nullable|string|max:50',
+        ]);
+
+        Wali::create($validatedData);
+
+        return redirect()->route('wali.input')->with('success', 'Data Wali berhasil ditambahkan.');
     }
 
     /**

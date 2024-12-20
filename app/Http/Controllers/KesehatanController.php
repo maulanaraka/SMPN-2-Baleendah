@@ -20,7 +20,9 @@ class KesehatanController extends Controller
 
     public function create()
     {
-        return view('siswa.input.kesehatan');
+        $siswa = new Siswa();
+        $kesehatan = new Kesehatan();
+        return view('siswa.input.kesehatan', compact('siswa', 'kesehatan'));
     }
 
     public function store(Request $request)
@@ -35,7 +37,7 @@ class KesehatanController extends Controller
 
         Kesehatan::create($validatedData);
 
-        return redirect()->route('kesehatan.create')->with('success', 'Data berhasil ditambahkan.');
+        return redirect()->route('kesehatan.input')->with('success', 'Data kesehatan berhasil ditambahkan.');
     }
 
     public function edit($siswaID)

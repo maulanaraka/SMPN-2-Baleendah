@@ -1,24 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.sidebar-edit', ['siswa' => $siswa])
+@include('layouts.sidebar-input')
 
 @if (session('success'))
-    <div class="alert alert-success bg-green-500 text-white p-3 rounded mb-4">
+    <div class="alert alert-success bg-white text-black p-3 rounded mb-4">
         {{ session('success') }}
     </div>
 @endif
 
 <div class="p-4 sm:ml-60 min-h-screen">
     <div class="p-2">
-        <h1 class="text-2xl font-semibold mt-10 mb-4">Edit Data Orang Tua</h1>
+        <h1 class="text-2xl font-semibold mt-10 mb-4">Tambah Data Orang Tua</h1>
 
-        <div class="border border-white p-2 rounded-lg text-center mb-5 bg-transparent text-black">
-            <h2 class="text-xl font-semibold">Data Ibu</h2>
-        </div>
-        <form action="{{ route('orang_tua.update', $siswa->siswaID) }}" method="POST">
+        <form action="{{ route('orang_tua.input') }}" method="POST">
             @csrf
-            @method('PUT')
+            <div class="border border-white p-2 rounded-lg text-center mb-5 bg-transparent text-black">
+                <h2 class="text-xl font-semibold">Data Ibu</h2>
+            </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 <div>
                     <label for="namaIbu" class="block mb-2 text-sm font-medium text-gray-900">Nama Ibu</label>
@@ -100,8 +99,8 @@
                 </div>
             </div>
             <div class="mt-6 flex justify-between">
-                <button type="submit" class="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700">Simpan Perubahan</button>
-                <a href="{{ route('wali.edit', $siswa->siswaID) }}" class="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700">
+                <button type="submit" class="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700">Tambah Data</button>
+                <a href="{{ route('wali.input')}}" class="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700">
                      Data Wali
                 </a>
             </div>

@@ -22,7 +22,9 @@ class TempatTinggalController extends Controller
      */
     public function create()
     {
-        //
+        $siswa = new Siswa();
+        $tempatTinggal = new TempatTinggal();
+        return view('siswa.input.tempat_tinggal', compact('siswa', 'tempatTinggal')); 
     }
 
     /**
@@ -30,7 +32,19 @@ class TempatTinggalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'jalan' => 'required|string|max:100',
+            'kota' => 'required|string|max:100',
+            'kodePos' => 'required|string|max:100',
+            'provinsi' => 'required|string|max:100',
+            'tinggalBersama' => 'required|string|max:100',
+            'jarakKeSekolah' => 'required|numeric|min:1|max:20',
+            'kendaraan' => 'required|string|max:100',
+        ]);
+
+        TempatTinggal::create($request->all());
+
+        return redirect()->route('tempat_tinggal.input')->with('success', 'Data tempat tinggal berhasil ditambahkan.');
     }
 
     /**

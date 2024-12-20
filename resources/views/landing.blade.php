@@ -27,7 +27,7 @@
                     <a href="#" class="text-white text-2xl font-bold">BUKIS</a>
                 </div>
                 <div>
-                    <a href="/login" class="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg shadow-md hover:bg-blue-700 transition">Masuk</a>
+                    <a href="/login" class="px-4 py-2 border border-white text-white font-bold rounded-lg shadow-md hover:bg-white hover:text-green-500 transition">Masuk</a>
                 </div>
             </div>
         </div>
@@ -40,7 +40,7 @@
             <p class="text-4xl md:text-5xl font-regular text-white mt-6">SMPN 2 Baleendah</p>
 
             <div class="mt-8">
-                <a href="/login" class="px-6 py-3 bg-blue-600 text-white font-bold rounded-lg shadow-md hover:bg-blue-700 transition">Mulai</a>
+                <a href="/login" class="px-6 py-3 border border-white text-white font-bold rounded-lg shadow-md hover:bg-white hover:text-green-500 transition">Mulai</a>
             </div>
         </div>
     </div>

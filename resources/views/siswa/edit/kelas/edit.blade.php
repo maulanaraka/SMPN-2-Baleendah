@@ -44,7 +44,7 @@
                 </div>
             </div>
 
-            <div class="mt-6">
+            <div class="mt-6 flex justify-between">
                 <button type="submit" class="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700">Update</button>
                 <a href="{{ route('siswa.kelas.index', $siswa->siswaID) }}" class="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700">
                     Cancel

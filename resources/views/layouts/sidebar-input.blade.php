@@ -22,107 +22,25 @@
         id="dataPribadi" 
         class="transition-all duration-300 ease-in-out overflow-hidden max-h-0 bg-white rounded-md shadow-lg border border-gray-200"
         >
-        <a href="{{ route('siswa.input', $siswa->siswaID) }}" 
+        <a href="{{ route('siswa.input') }}" 
             class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100">
             Siswa
         </a>
-        <a href="{{ route('tempat_tinggal.input', $siswa->siswaID) }}" 
+        <a href="{{ route('tempat_tinggal.input') }}" 
             class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100">
             Tempat Tinggal
         </a>
-        <a href="{{ route('kesehatan.input', $siswa->siswaID) }}"  
+        <a href="{{ route('kesehatan.input') }}"  
             class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100">
             Kesehatan
         </a>
-        <a href="{{ route('orang_tua.input', $siswa->siswaID) }}" 
+        <a href="{{ route('orang_tua.input') }}" 
             class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100">
-            Orang Tua / Wali
+            Orang Tua
         </a>
-        </div>
-    </div>
-
-    <!-- Dropdown: Pendidikan -->
-    <div class="relative">
-        <button 
-        class="flex items-center justify-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100"
-        onclick="toggleDropdown('pendidikan')"
-        >
-        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M23 18.9999H22V8.99991H18V6.58569L12 0.585693L6 6.58569V8.99991H2V18.9999H1V20.9999H23V18.9999ZM6 19H4V11H6V19ZM18 11H20V19H18V11ZM11 12H13V19H11V12Z"/>
-        </svg>
-        <span class="flex-1 ms-3 text-left whitespace-nowrap">Pendidikan</span>
-        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-        </svg>
-        </button>
-        <div 
-        id="pendidikan" 
-        class="transition-all duration-300 ease-in-out overflow-hidden max-h-0 bg-white rounded-md shadow-lg border border-gray-200"
-        >
-        <a href="#"
+        <a href="{{ route('wali.input') }}" 
             class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100">
-            Kelas
-        </a>
-        <a href="#"
-            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100">
-            Kehadiran
-        </a>
-        <a href="#"
-            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100">
-            Nilai Siswa
-        </a>
-        <a href="#" 
-            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100">
-            Ekstrakulikuler
-        </a>
-        <a href="#" 
-            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100">
-            Prestasi
-        </a>
-        <a href="#" 
-            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100">
-            Beasiswa
-        </a>
-        <a href="#" 
-            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100">
-            Intelegensi dan Kepribadian
-        </a>
-        </div>
-    </div>
-
-    <!-- Dropdown: Informasi Tambahan -->
-    <div class="relative">
-        <button 
-        class="flex items-center justify-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100"
-        onclick="toggleDropdown('informasiTambahan')"
-        >
-        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 9.5C12.8284 9.5 13.5 8.82843 13.5 8C13.5 7.17157 12.8284 6.5 12 6.5C11.1716 6.5 10.5 7.17157 10.5 8C10.5 8.82843 11.1716 9.5 12 9.5ZM14 15H13V10.5H10V12.5H11V15H10V17H14V15Z"/>
-        </svg>
-        <span class="flex-1 ms-3 text-left whitespace-nowrap">Informasi Tambahan</span>
-        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-        </svg>
-        </button>
-        <div 
-        id="informasiTambahan" 
-        class="transition-all duration-300 ease-in-out overflow-hidden max-h-0 bg-white rounded-md shadow-lg border border-gray-200"
-        >
-        <a href="#" 
-        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100">
-        Kelulusan
-        </a>
-        <a href="#" 
-        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100">
-        Pendidikan Sebelumnya
-        </a>
-        <a href="#" 
-        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100">
-        Pindah Sekolah
-        </a>
-        <a href="#" 
-        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100">
-        Catatan Siswa
+            Wali
         </a>
         </div>
     </div>

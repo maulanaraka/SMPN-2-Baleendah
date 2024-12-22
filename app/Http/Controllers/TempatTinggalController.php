@@ -20,11 +20,18 @@ class TempatTinggalController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        $siswa = new Siswa();
+        // Ambil SiswaID dari URL
+        $siswaID = $request->query('siswaID');
+
+        // Pastikan SiswaID tidak null
+        if (!$siswaID) {
+            return redirect()->route('siswa.input')->with('error', 'SiswaID tidak ditemukan.');
+        }
+        
         $tempatTinggal = new TempatTinggal();
-        return view('siswa.input.tempat_tinggal', compact('siswa', 'tempatTinggal')); 
+        return view('siswa.input.tempat_tinggal', compact('siswaID', 'tempatTinggal')); 
     }
 
     /**
@@ -32,7 +39,7 @@ class TempatTinggalController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'jalan' => 'required|string|max:100',
             'kota' => 'required|string|max:100',
             'kodePos' => 'required|string|max:100',
@@ -40,11 +47,12 @@ class TempatTinggalController extends Controller
             'tinggalBersama' => 'required|string|max:100',
             'jarakKeSekolah' => 'required|numeric|min:1|max:20',
             'kendaraan' => 'required|string|max:100',
+            'SiswasiswaID' => 'required|string|exists:siswa,siswaID',
         ]);
 
-        TempatTinggal::create($request->all());
+        TempatTinggal::create($validatedData);
 
-        return redirect()->route('tempat_tinggal.input')->with('success', 'Data tempat tinggal berhasil ditambahkan.');
+        return redirect()->route('kesehatan.input', ['siswaID' => $validatedData['SiswasiswaID']])->with('success', 'Data tempat tinggal berhasil disimpan! Silakan tambahkan data kesehatan.');
     }
 
     /**

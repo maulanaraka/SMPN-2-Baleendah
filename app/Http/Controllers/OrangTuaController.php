@@ -20,19 +20,22 @@ class OrangTuaController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        $siswa = new Siswa();
+        $siswaID = $request->query('siswaID');
+
+        if (!$siswaID) {
+            return redirect()->route('kesehatan.input')->with('error', 'SiswaID tidak ditemukan.');
+        }
+
         $orangTua = new OrangTua();
-        return view('siswa.input.orang_tua', compact('siswa', 'orangTua'));
+        return view('siswa.input.orang_tua', compact('siswaID', 'orangTua'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
+            'SiswasiswaID' => 'required|string|exists:siswa,siswaID',
             'namaIbu' => 'required|string|max:255',
             'nomorTeleponIbu' => 'required|string|max:25',
             'tempatLahirIbu' => 'required|string|max:50',
@@ -55,12 +58,9 @@ class OrangTuaController extends Controller
 
         OrangTua::create($validatedData);
 
-        return redirect()->route('orang_tua.input')->with('success', 'Data Orang Tua berhasil ditambahkan.');
+        return redirect()->route('wali.input', ['siswaID' => $validatedData['SiswasiswaID']])->with('success', 'Data orang tua berhasil disimpan! Silakan tambahkan data wali.');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //

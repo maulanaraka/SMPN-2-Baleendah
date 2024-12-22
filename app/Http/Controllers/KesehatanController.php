@@ -18,17 +18,22 @@ class KesehatanController extends Controller
     }
     
 
-    public function create()
+    public function create(Request $request)
     {
-        $siswa = new Siswa();
+        $siswaID = $request->query('siswaID');
+
+        if (!$siswaID) {
+            return redirect()->route('tempat_tinggal.input')->with('error', 'SiswaID tidak ditemukan.');
+        }
+
         $kesehatan = new Kesehatan();
-        return view('siswa.input.kesehatan', compact('siswa', 'kesehatan'));
-    }
+        return view('siswa.input.kesehatan', compact('siswaID', 'kesehatan'));
+        }
 
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'SiswasiswaID' => 'required|exists:siswa,siswaID',
+            'SiswasiswaID' => 'required|string|exists:siswa,siswaID',
             'beratDiterima' => 'required|numeric',
             'tinggiDiterima' => 'required|numeric',
             'golDarah' => 'required|string|max:10',
@@ -37,7 +42,7 @@ class KesehatanController extends Controller
 
         Kesehatan::create($validatedData);
 
-        return redirect()->route('kesehatan.input')->with('success', 'Data kesehatan berhasil ditambahkan.');
+        return redirect()->route('orang_tua.input', ['siswaID' => $validatedData['SiswasiswaID']])->with('success', 'Data kesehatan berhasil disimpan! Silakan tambahkan data orang tua.');
     }
 
     public function edit($siswaID)

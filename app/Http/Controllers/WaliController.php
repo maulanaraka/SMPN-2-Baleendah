@@ -20,11 +20,16 @@ class WaliController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        $siswa = new Siswa();
+        $siswaID = $request->query('siswaID');
+
+        if (!$siswaID) {
+            return redirect()->route('orang_tua.input')->with('error', 'SiswaID tidak ditemukan.');
+        }
+
         $wali = new Wali();
-        return view('siswa.input.wali', compact('siswa', 'wali'));
+        return view('siswa.input.wali', compact('siswaID', 'wali'));
     }
 
     /**
@@ -32,7 +37,8 @@ class WaliController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $validatedData = $request->validate([
+            'SiswasiswaID' => 'required|string|exists:siswa,siswaID',
             'namaWali' => 'nullable|string|max:255',
             'nomorTeleponWali' => 'nullable|string|max:25',
             'tempatLahirWali' => 'nullable|string|max:50',

@@ -9,13 +9,14 @@ class SiswaController extends Controller
 {
     public function create()
     {
-        $siswa = new Siswa();
-        return view('siswa.input.siswa', compact('siswa')); 
+        $siswaID = uniqid();
+        return view('siswa.input.siswa', compact('siswaID')); 
     }
 
     public function store(Request $request)
     {
         $validatedData = $request->validate([
+            'siswaID' => 'required|string|unique:siswa,siswaID',
             'NISN' => 'required|string',
             'namaLengkap' => 'required|string',
             'namaPanggilan' => 'nullable|string',
@@ -32,9 +33,9 @@ class SiswaController extends Controller
             'bahasaDirumah' => 'nullable|string',
         ]);
 
-        Siswa::create($validatedData);
+        $siswa = Siswa::create($validatedData);
 
-        return redirect()->route('siswa.input')->with('success', 'Data berhasil ditambahkan.');
+        return redirect()->route('tempat_tinggal.input', ['siswaID' => $siswa->siswaID])->with('success', 'Data siswa berhasil disimpan! Silakan tambahkan data tempat tinggal.');
     }
     public function index()
     {

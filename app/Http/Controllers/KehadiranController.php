@@ -32,7 +32,9 @@ class KehadiranController extends Controller
      */
     public function create($siswaID)
     {
-        return view('siswa.edit.kehadiran.create', compact('siswaID'));
+        $siswa = Siswa::findOrFail($siswaID);
+        $kehadiran = new Kehadiran();
+        return view('siswa.edit.kehadiran.create', compact('siswa', 'kehadiran', 'siswaID'));
     }
 
     /**
@@ -87,15 +89,6 @@ class KehadiranController extends Controller
         $kehadiran->update($request->all());
 
         return redirect()->route('siswa.kehadiran.index', $siswaID)->with('success', 'Kehadiran updated successfully.');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show($siswaID, $kehadiranID)
-    {
-        $kehadiran = Kehadiran::findOrFail($kehadiranID);
-        return view('siswa.edit.kehadiran.show', compact('kehadiran', 'siswaID'));
     }
 
     /**

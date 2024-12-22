@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="p-4 sm:ml-60">
+<div class="p-4 sm:ml-60 min-h-screen">
     <div class="p-2">
         <h1 class="text-2xl font-semibold mt-10 mb-4 text-gray-800">Data Siswa</h1>
         

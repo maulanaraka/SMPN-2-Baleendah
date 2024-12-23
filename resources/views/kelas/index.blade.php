@@ -48,7 +48,7 @@
                     @foreach($kelass as $kelas)
                         <tr class="hover:bg-gray-50">
                             <td class="py-3 px-4 border-b text-center">{{ $loop->iteration }}</td>
-                            <td class="py-3 px-4 border-b text-center">{{ $kelas->kelas }}</td>
+                            <td class="py-3 px-4 border-b text-center">{{ $kelas->kelasID }}</td>
                             <td class="py-3 px-4 border-b text-center">{{ $kelas->tingkat }}</td>
                             <td class="py-3 px-4 border-b text-center">
                                 <div class="flex justify-center space-x-2">

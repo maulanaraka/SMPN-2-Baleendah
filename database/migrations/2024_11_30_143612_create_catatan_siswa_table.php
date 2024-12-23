@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('catatan_siswa', function (Blueprint $table) {
             $table->increments('catatanID');
             $table->string('SiswasiswaID', 50);
-
             $table->string('catatanPenting', 500); 
+            $table->timestamps();
 
             // foreign key
             $table  ->foreign('SiswasiswaID')

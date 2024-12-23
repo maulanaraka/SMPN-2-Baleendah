@@ -11,10 +11,14 @@ use App\Http\Controllers\WaliController;
 use App\Http\Controllers\SiswaKelasController;
 use App\Http\Controllers\KehadiranController;
 use App\Http\Controllers\MataPelajaranSiswaController;
+use App\Http\Controllers\PrestasiController;
+use App\Http\Controllers\BeasiswaController;
 
 use App\Http\Controllers\EkstrakurikulerController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MataPelajaranController;
+use App\Http\Controllers\EkstrakurikulerSiswaController;
+use App\Http\Controllers\IntelegensiController;
 
 use App\Http\Middleware\UserAccess;
 use Illuminate\Support\Facades\Route;
@@ -70,6 +74,22 @@ Route::middleware(['auth', 'role:operator'])->group(function () {
     Route::put('/mata-pelajaran/{mataPelajaranID}', [MataPelajaranController::class, 'update'])->name('mata_pelajaran.update');
     Route::delete('/mata-pelajaran/{mataPelajaranID}', [MataPelajaranController::class, 'destroy'])->name('mata_pelajaran.destroy');
 
+    // Prestasi
+    Route::get('/prestasi', [PrestasiController::class, 'index'])->name('prestasi.index');
+    Route::get('/prestasi/create', [PrestasiController::class, 'create'])->name('prestasi.create');
+    Route::post('/prestasi', [PrestasiController::class, 'store'])->name('prestasi.store');
+    Route::get('/prestasi/{prestasiID}/edit', [PrestasiController::class, 'edit'])->name('prestasi.edit');
+    Route::put('/prestasi/{prestasiID}', [PrestasiController::class, 'update'])->name('prestasi.update');
+    Route::delete('/prestasi/{prestasiID}', [PrestasiController::class, 'destroy'])->name('prestasi.destroy');
+
+
+    // Beasiswa
+    Route::get('/beasiswa', [BeasiswaController::class, 'index'])->name('beasiswa.index');
+    Route::get('/beasiswa/create', [BeasiswaController::class, 'create'])->name('beasiswa.create');
+    Route::post('/beasiswa', [BeasiswaController::class, 'store'])->name('beasiswa.store');
+    Route::get('/beasiswa/{beasiswaID}/edit', [BeasiswaController::class, 'edit'])->name('beasiswa.edit');
+    Route::put('/beasiswa/{beasiswaID}', [BeasiswaController::class, 'update'])->name('beasiswa.update');
+    Route::delete('/beasiswa/{beasiswaID}', [BeasiswaController::class, 'destroy'])->name('beasiswa.destroy');
 });
 
 // Staff
@@ -136,6 +156,7 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
         });
     });
 
+    // Nilai Siswa
     Route::prefix('siswa/{siswaID}')->name('siswa.')->group(function() {
         Route::get('nilai', [MataPelajaranSiswaController::class, 'index'])->name('nilai.index');
         Route::get('nilai/create', [MataPelajaranSiswaController::class, 'create'])->name('nilai.create');
@@ -145,6 +166,26 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
         Route::delete('nilai/{mataPelajaranSiswaID}', [MataPelajaranSiswaController::class, 'destroy'])->name('nilai.destroy');
     });
 
+    
+    // Ekstrakurikuler
+    Route::prefix('siswa/{siswaID}/ekstrakurikuler_siswa')->name('siswa.ekstrakurikuler_siswa.')->group(function () {
+        Route::get('/', [EkstrakurikulerSiswaController::class, 'index'])->name('index');
+        Route::get('/create', [EkstrakurikulerSiswaController::class, 'create'])->name('create');
+        Route::post('/', [EkstrakurikulerSiswaController::class, 'store'])->name('store');
+        Route::get('/{ekstrakurikulerSiswaID}/edit', [EkstrakurikulerSiswaController::class, 'edit'])->name('edit');
+        Route::put('/{ekstrakurikulerSiswaID}', [EkstrakurikulerSiswaController::class, 'update'])->name('update');
+        Route::delete('/{ekstrakurikulerSiswaID}', [EkstrakurikulerSiswaController::class, 'destroy'])->name('destroy');
+    });
+
+    // Intelegensi
+    Route::prefix('siswa/{siswaID}/intelegensi')->name('siswa.intelegensi.')->group(function () {
+        Route::get('/', [IntelegensiController::class, 'index'])->name('index');
+        Route::get('/create', [IntelegensiController::class, 'create'])->name('create');
+        Route::post('/', [IntelegensiController::class, 'store'])->name('store');
+        Route::get('/{intelegensiID}/edit', [IntelegensiController::class, 'edit'])->name('edit');
+        Route::put('/{intelegensiID}', [IntelegensiController::class, 'update'])->name('update');
+        Route::delete('/{intelegensiID}', [IntelegensiController::class, 'destroy'])->name('destroy');
+    });
 });
 
 

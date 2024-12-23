@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SessionController;
-
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\KesehatanController;
 use App\Http\Controllers\TempatTinggalController;
@@ -27,6 +27,10 @@ Route::middleware('guest')->group(function () {
     Route::get('/login', [SessionController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [SessionController::class, 'login']);
 });
+
+// Register routes
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
 
 // Logout route
 Route::post('/logout', [SessionController::class, 'logout'])->name('logout')->middleware('auth');
@@ -72,7 +76,13 @@ Route::middleware(['auth', 'role:operator'])->group(function () {
 Route::middleware(['auth', 'role:staff'])->group(function () {
     Route::get('/staff', [UserController::class, 'staff'])->name('staff');
 
+    //Backup
+    Route::get('/backup-data', [SiswaController::class, 'showBackup'])->name('siswa.showBackup');
+    Route::get('/download-backup', [SiswaController::class, 'downloadBackup'])->name('siswa.downloadBackup');
+
     // Siswa
+    Route::get('/siswa/input', [SiswaController::class, 'create'])->name('siswa.input');
+    Route::post('/siswa', [SiswaController::class, 'store'])->name('siswa.store');
     Route::get('/siswa/{siswaID}/edit', [SiswaController::class, 'edit'])->name('siswa.edit');
     Route::put('/siswa/{siswaID}', [SiswaController::class, 'update'])->name('siswa.update');
     Route::delete('/siswa/{siswaID}', [SiswaController::class, 'destroy'])->name('siswa.destroy');
@@ -80,20 +90,26 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
     Route::get('/siswa/{siswaID}/show', [SiswaController::class, 'show'])->name('siswa.show');
 
     // Kesehatan
-    Route::get('/kesehatan/input', [KesehatanController::class, 'create'])->name('kesehatan.create');
+    Route::get('/kesehatan/input', [KesehatanController::class, 'create'])->name('kesehatan.input');
     Route::post('/kesehatan', [KesehatanController::class, 'store'])->name('kesehatan.store');
     Route::get('/kesehatan/{kesehatanID}/edit', [KesehatanController::class, 'edit'])->name('kesehatan.edit');
     Route::put('/kesehatan/{kesehatanID}', [KesehatanController::class, 'update'])->name('kesehatan.update');
 
     // Tempat Tinggal
+    Route::get('/tempat-tinggal/input', [TempatTinggalController::class, 'create'])->name('tempat_tinggal.input');
+    Route::post('/tempat-tinggal', [TempatTinggalController::class, 'store'])->name('tempat_tinggal.store');
     Route::get('tempat-tinggal/{tempatTinggalID}/edit', [TempatTinggalController::class, 'edit'])->name('tempat_tinggal.edit');
     Route::put('tempat-tinggal/{tempatTinggalID}', [TempatTinggalController::class, 'update'])->name('tempat_tinggal.update');
 
     // Orang Tua
+    Route::get('orang-tua/input', [OrangTuaController::class, 'create'])->name('orang_tua.input');
+    Route::post('orang-tua', [OrangTuaController::class, 'store'])->name('orang_tua.store');
     Route::get('orang-tua/{orangTuaID}/edit', [OrangTuaController::class, 'edit'])->name('orang_tua.edit');
     Route::put('orang-tua/{orangTuaID}', [OrangTuaController::class, 'update'])->name('orang_tua.update');
     
     // Wali
+    Route::get('wali/input', [WaliController::class, 'create'])->name('wali.input');
+    Route::post('wali', [WaliController::class, 'store'])->name('wali.store');
     Route::get('wali/{waliId}/edit', [WaliController::class, 'edit'])->name('wali.edit');
     Route::put('wali/{waliaId}', [WaliController::class, 'update'])->name('wali.update');
 
@@ -108,8 +124,17 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
     });
 
     // Kehadiran
-    Route::get('kehadiran{kehadiranID}/edit', [KehadiranController::class, 'edit'])->name('kehadiran.edit');
-    Route::put('kehadiran{kehadiranID}', [KehadiranController::class, 'update'])->name('kehadiran.update');
+    Route::prefix('siswa/{siswaID}')->name('siswa.')->group(function () {
+        Route::prefix('kehadiran')->group(function () {
+            Route::get('/', [KehadiranController::class, 'index'])->name('kehadiran.index');
+            Route::get('create', [KehadiranController::class, 'create'])->name('kehadiran.create');
+            Route::post('/', [KehadiranController::class, 'store'])->name('kehadiran.store');
+            Route::get('{kehadiranID}/edit', [KehadiranController::class, 'edit'])->name('kehadiran.edit');
+            Route::put('{kehadiranID}', [KehadiranController::class, 'update'])->name('kehadiran.update');
+            Route::get('{kehadiranID}', [KehadiranController::class, 'show'])->name('kehadiran.show');
+            Route::delete('{kehadiranID}', [KehadiranController::class, 'destroy'])->name('kehadiran.destroy');
+        });
+    });
 
     Route::prefix('siswa/{siswaID}')->name('siswa.')->group(function() {
         Route::get('nilai', [MataPelajaranSiswaController::class, 'index'])->name('nilai.index');

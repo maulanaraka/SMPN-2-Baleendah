@@ -20,9 +20,16 @@ class WaliController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $siswaID = $request->query('siswaID');
+
+        if (!$siswaID) {
+            return redirect()->route('orang_tua.input')->with('error', 'SiswaID tidak ditemukan.');
+        }
+
+        $wali = new Wali();
+        return view('siswa.input.wali', compact('siswaID', 'wali'));
     }
 
     /**
@@ -30,7 +37,23 @@ class WaliController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'SiswasiswaID' => 'required|string|exists:siswa,siswaID',
+            'namaWali' => 'nullable|string|max:255',
+            'nomorTeleponWali' => 'nullable|string|max:25',
+            'tempatLahirWali' => 'nullable|string|max:50',
+            'tanggalLahirWali' => 'nullable|date',
+            'kewarganegaraanWali' => 'nullable|string|max:50',
+            'pendidikanTertinggiWali' => 'nullable|string|max:25',
+            'pekerjaanWali' => 'nullable|string|max:50',
+            'penghasilanWali' => 'nullable|numeric',
+            'alamatWali' => 'nullable|string|max:255',
+            'hubunganDenganSiswa' => 'nullable|string|max:50',
+        ]);
+
+        Wali::create($validatedData);
+
+        return redirect()->route('wali.input')->with('success', 'Data Wali berhasil ditambahkan.');
     }
 
     /**

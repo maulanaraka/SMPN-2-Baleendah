@@ -7,13 +7,40 @@ use App\Models\Siswa;
 
 class SiswaController extends Controller
 {
-    /**
-     * Display a listing of the siswa data.
-     */
+    public function create()
+    {
+        $siswaID = uniqid();
+        return view('siswa.input.siswa', compact('siswaID')); 
+    }
+
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'siswaID' => 'required|string|unique:siswa,siswaID',
+            'NISN' => 'required|string',
+            'namaLengkap' => 'required|string',
+            'namaPanggilan' => 'nullable|string',
+            'jenisKelamin' => 'required|string',
+            'tempatLahir' => 'required|string',
+            'tanggalLahir' => 'required|date',
+            'agama' => 'required|string',
+            'kewarganegaraan' => 'required|string',
+            'anakKe' => 'nullable|integer',
+            'saudaraKandung' => 'nullable|integer',
+            'saudaraTiri' => 'nullable|integer',
+            'saudaraAngkat' => 'nullable|integer',
+            'yatimPiatu' => 'required|string',
+            'bahasaDirumah' => 'nullable|string',
+        ]);
+
+        $siswa = Siswa::create($validatedData);
+
+        return redirect()->route('tempat_tinggal.input', ['siswaID' => $siswa->siswaID])->with('success', 'Data siswa berhasil disimpan! Silakan tambahkan data tempat tinggal.');
+    }
     public function index()
     {
         $siswa = Siswa::all();
-        return view('siswa.index', compact('siswa'));
+        return view('siswa.data-siswa', compact('siswa'));
     }
 
     public function dataSiswa(Request $request)
@@ -28,13 +55,13 @@ class SiswaController extends Controller
 
         $siswa = $query->paginate(10);
 
-        return view('siswa.index', compact('siswa')); // Adjust view path
+        return view('siswa.data-siswa', compact('siswa')); // Adjust view path
     }
 
     public function show($siswaID)
     {
         $siswa = Siswa::findOrFail($siswaID);
-        return view('siswa.show', compact('siswa')); // Adjust view path
+        return view('siswa.detail-siswa', compact('siswa')); // Adjust view path
     }
 
     public function edit($siswaID)
@@ -67,6 +94,31 @@ class SiswaController extends Controller
         $siswa->update($validatedData);
 
         return back()->with('success', 'Data berhasil diperbarui!');
+    }
+
+    public function showBackup()
+    {
+        return view('siswa.backup');
+    }
+    
+    public function downloadBackup()
+    {
+         // Retrieve all student data
+         $siswa = Siswa::all();
+
+         // Convert the data to JSON
+         $jsonSiswa = $siswa->toJson(JSON_PRETTY_PRINT);
+ 
+         // Create a filename for the backup
+         $fileName = 'backup_data_' . date('Y-m-d_H-i-s') . '.json';
+ 
+         // Create a response with the JSON data as a download
+         return Response::streamDownload(function() use ($jsonSiswa) {
+             echo $jsonSiswa;
+         }, $fileName, [
+             'Content-Type' => 'application/json',
+             'Content-Disposition' => 'attachment; filename="' . $fileName . '"',
+         ]);
     }
 
     public function destroy($siswaID)

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('tanggal');
             $table->string('alamatSekolah', 255);
             $table->string('alasanPindah', 255);
+            $table->timestamps();
 
             // foreign key
             $table  ->foreign('SiswasiswaID')

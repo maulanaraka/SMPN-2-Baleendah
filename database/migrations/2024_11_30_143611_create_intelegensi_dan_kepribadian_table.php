@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('penyesuaianDiri', 50);
             $table->string('kemantapanEmosi', 50);
             $table->string('kerjasama', 50);
+            $table->timestamps();
 
             // foreign key
             $table  ->foreign('SiswasiswaID')

@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             SiswaKelasSeeder::class,
             KehadiranSeeder::class,
             MataPelajaranSiswaSeeder::class,
+            SiswaEkstrakurikulerSeeder::class,
         ]);
     }
 }

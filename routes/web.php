@@ -197,7 +197,7 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
 
     
     // Ekstrakurikuler
-    Route::prefix('siswa/{siswaID}/ekstrakurikuler_siswa')->name('siswa.ekstrakurikuler_siswa.')->group(function () {
+    Route::prefix('siswa/{siswaID}/ekstrakurikuler')->name('siswa.ekstrakurikuler.')->group(function () {
         Route::get('/', [EkstrakurikulerSiswaController::class, 'index'])->name('index');
         Route::get('/create', [EkstrakurikulerSiswaController::class, 'create'])->name('create');
         Route::post('/', [EkstrakurikulerSiswaController::class, 'store'])->name('store');

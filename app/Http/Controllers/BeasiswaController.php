@@ -3,44 +3,84 @@
 namespace App\Http\Controllers;
 
 use App\Models\Beasiswa;
+use App\Models\Siswa;
 use Illuminate\Http\Request;
 
 class BeasiswaController extends Controller
 {
-    // Display a listing of the resource
-    public function index()
+    public function index($SiswasiswaID)
     {
-        $beasiswas = Beasiswa::all();
-        return view('beasiswa.index', compact('beasiswas'));
+        $siswa = Siswa::findOrFail($SiswasiswaID);
+        $beasiswa = Beasiswa::where('SiswasiswaID', $SiswasiswaID)->get();
+        return view('siswa.edit.beasiswa.index', compact('beasiswa', 'SiswasiswaID','siswa'));
     }
 
-    public function create()
+    public function create($SiswasiswaID)
     {
-        return view('beasiswa.create');
+        $siswa = Siswa::findOrFail($SiswasiswaID);
+        return view('siswa.edit.beasiswa.create', compact('SiswasiswaID', 'siswa'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request, $SiswasiswaID)
     {
-        Beasiswa::create($request->all());
-        return redirect()->route('beasiswa.index')->with('success', 'Prestasi berhasil ditambahkan.');
+        $request->validate([
+            'penyelenggara' => 'required|max:255',
+            'deskripsi' => 'required|max:255',
+            'tahun' => 'required|max:10',
+        ]);
+
+        Beasiswa::create([
+            'SiswasiswaID' => $SiswasiswaID,
+            'penyelenggara' => $request->penyelenggara,
+            'deskripsi' => $request->deskripsi,
+            'tahun' => $request->tahun,
+        ]);
+
+        return redirect()->route('siswa.beasiswa.index', $SiswasiswaID)
+                        ->with('success', 'Beasiswa created successfully.');
     }
 
-    public function edit($beasiswaID)
+    public function edit($SiswasiswaID, $beasiswaID)
     {
-        $beasiswa = Beasiswa::find($beasiswaID);
-        return view('beasiswa.edit', compact('beasiswa'));
+        $siswa = Siswa::findOrFail($SiswasiswaID);
+        $beasiswa = Beasiswa::where('beasiswaID', $beasiswaID)
+                            ->where('SiswasiswaID', $SiswasiswaID)
+                            ->firstOrFail();
+
+        return view('siswa.edit.beasiswa.edit', compact('beasiswa', 'SiswasiswaID','siswa'));
     }
 
-    public function update(Request $request, $beasiswaID)
+    public function update(Request $request, $SiswasiswaID, $beasiswaID)
     {
-        $beasiswa = Beasiswa::find($beasiswaID);
-        $beasiswa->update($request->all());
-        return redirect()->route('beasiswa.index')->with('success', 'Prestasi berhasil diperbarui.');
+        $request->validate([
+            'penyelenggara' => 'required|max:255',
+            'deskripsi' => 'required|max:255',
+            'tahun' => 'required|max:10',
+        ]);
+
+        $beasiswa = Beasiswa::where('beasiswaID', $beasiswaID)
+                            ->where('SiswasiswaID', $SiswasiswaID)
+                            ->firstOrFail();
+
+        $beasiswa->update([
+            'penyelenggara' => $request->penyelenggara,
+            'deskripsi' => $request->deskripsi,
+            'tahun' => $request->tahun,
+        ]);
+
+        return redirect()->route('siswa.beasiswa.index', $SiswasiswaID)
+                        ->with('success', 'Beasiswa updated successfully.');
     }
 
-    public function destroy($beasiswaID)
+    public function destroy($SiswasiswaID, $beasiswaID)
     {
-        Beasiswa::destroy($beasiswaID);
-        return redirect()->route('beasiswa.index')->with('success', 'Prestasi berhasil dihapus.');
+        $beasiswa = Beasiswa::where('beasiswaID', $beasiswaID)
+                            ->where('SiswasiswaID', $SiswasiswaID)
+                            ->firstOrFail();
+
+        $beasiswa->delete();
+
+        return redirect()->route('siswa.beasiswa.index', $SiswasiswaID)
+                        ->with('success', 'Beasiswa deleted successfully.');
     }
 }

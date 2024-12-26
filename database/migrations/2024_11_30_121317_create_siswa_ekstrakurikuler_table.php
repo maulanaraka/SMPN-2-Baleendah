@@ -15,23 +15,21 @@ return new class extends Migration
             $table->increments('siswaEkstrakurikulerID');
             $table->string('SiswasiswaID', 50);
             $table->unsignedInteger('EkstrakurikulerekstrakurikulerID');
-            
             $table->integer('nilai')->nullable();
             $table->string('keterangan', 255)->nullable();
             $table->integer('semester')->nullable();
+            $table->string('tahunAjaran', 10);
             $table->timestamps();
         
-            // foreign key
-            $table  ->foreign('SiswasiswaID')
+            // foreign keys
+            $table->foreign('SiswasiswaID')
                     ->references('siswaID')
                     ->on('siswa')
                     ->onDelete('cascade');
-            $table  ->foreign('EkstrakurikulerekstrakurikulerID')
+            $table->foreign('EkstrakurikulerekstrakurikulerID')
                     ->references('ekstrakurikulerID')
                     ->on('ekstrakurikuler');
-
-            // Composite primary key for the pivot table
-        });        
+        });           
     }
 
     /**

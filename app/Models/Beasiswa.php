@@ -11,15 +11,11 @@ class Beasiswa extends Model
 
     protected $table = 'beasiswa';
     protected $primaryKey = 'beasiswaID';
-    public $incrementing = true;
+    protected $fillable = ['SiswasiswaID', 'penyelenggara', 'deskripsi', 'tahun'];
 
-    protected $fillable = [
-        'penyelenggara',
-        'tahun',
-    ];
-
-    protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
-    ];
+    // Relationship to the Siswa model
+    public function siswa()
+    {
+        return $this->belongsTo(Siswa::class, 'SiswasiswaID', 'siswaID');
+    }
 }

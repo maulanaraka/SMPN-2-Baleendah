@@ -27,33 +27,30 @@
 
 <div class="p-4 sm:ml-60 min-h-screen">
     <div class="p-2">
-        <h1 class="text-2xl font-semibold mt-10 mb-4">Ekstrakurikuler for Siswa</h1>
-
-        <a href="{{ route('siswa.ekstrakurikuler.create', $siswa->siswaID) }}" class="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 mb-3 inline-block">Add Ekstrakurikuler</a>
-
+        <h1 class="text-2xl font-semibold mt-10 mb-4">Beasiswa List</h1>
+        <a href="{{ route('siswa.beasiswa.create', $siswa->siswaID) }}" class="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 mb-3 inline-block">Add New Beasiswa</a>
+        
         <div class="overflow-x-auto">
             <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
                 <thead class="bg-gray-200 text-gray-800">
                     <tr>
-                        <th class="py-3 px-4 border-b text-center">Ekstrakurikuler</th>
-                        <th class="py-3 px-4 border-b text-center">Nilai</th>
-                        <th class="py-3 px-4 border-b text-center">Keterangan</th>
-                        <th class="py-3 px-4 border-b text-center">Semester</th>
-                        <th class="py-3 px-4 border-b text-center">Tahun Ajaran</th>
+                        <th class="py-3 px-4 border-b text-center">No</th>
+                        <th class="py-3 px-4 border-b text-center">Penyelenggara</th>
+                        <th class="py-3 px-4 border-b text-center">Deskripsi</th>
+                        <th class="py-3 px-4 border-b text-center">Tahun</th>
                         <th class="py-3 px-4 border-b text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($data as $item)
-                        <tr class="hover:bg-gray-50">
-                            <td class="py-3 px-4 border-b text-center">{{ $item->ekstrakurikuler->nama }}</td>
-                            <td class="py-3 px-4 border-b text-center">{{ $item->nilai }}</td>
-                            <td class="py-3 px-4 border-b text-center">{{ $item->keterangan }}</td>
-                            <td class="py-3 px-4 border-b text-center">{{ $item->semester }}</td>
-                            <td class="py-3 px-4 border-b text-center">{{ $item->tahunAjaran }}</td>
+                    @foreach($beasiswa as $item)
+                        <tr>
+                            <td class="py-3 px-4 border-b text-center">{{ $loop->iteration }}</td>
+                            <td class="py-3 px-4 border-b text-center">{{ $item->penyelenggara }}</td>
+                            <td class="py-3 px-4 border-b text-center">{{ $item->deskripsi }}</td>
+                            <td class="py-3 px-4 border-b text-center">{{ $item->tahun }}</td>
                             <td class="py-3 px-4 border-b text-center">
                                 <div class="flex justify-center space-x-2">
-                                    <form action="{{ route('siswa.ekstrakurikuler.edit', [$siswa->siswaID, $item->siswaEkstrakurikulerID]) }}" method="GET" class="inline" title="Edit">
+                                    <form action="{{ route('siswa.beasiswa.edit', [$siswa->siswaID, $item->beasiswaID]) }}" method="GET" class="inline" title="Edit">
                                         <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg p-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5">
                                                 <path d="M5 18.89H6.41421L15.7279 9.57627L14.3137 8.16206L5 17.4758V18.89ZM21 20.89H3V16.6473L16.435 3.21231C16.8256 2.82179 17.4587 2.82179 17.8492 3.21231L20.6777 6.04074C21.0682 6.43126 21.0682 7.06443 20.6777 7.45495L9.24264 18.89H21V20.89ZM15.7279 6.74785L17.1421 8.16206L18.5563 6.74785L17.1421 5.33363L15.7279 6.74785Z"></path>
@@ -61,10 +58,10 @@
                                         </button>
                                     </form>
                                     <!-- Tombol Hapus -->
-                                    <form action="{{ route('siswa.ekstrakurikuler.destroy', [$siswa->siswaID, $item->siswaEkstrakurikulerID]) }}" method="POST" class="inline" title="Hapus">
+                                    <form action="{{ route('siswa.beasiswa.destroy', [$siswa->siswaID, $item->beasiswaID]) }}" method="POST" class="inline" title="Hapus">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus ekstrakurikuler ini?')" class="bg-red-500 hover:bg-red-600 text-white rounded-lg p-2">
+                                        <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus beasiswa ini?')" class="bg-red-500 hover:bg-red-600 text-white rounded-lg p-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5">
                                                 <path d="M17 6H22V8H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V8H2V6H7V3C7 2.44772 7.44772 2 8 2H16C16.5523 2 17 2.44772 17 3V6ZM18 8H6V20H18V8ZM9 11H11V17H9V11ZM13 11H15V17H13V11ZM9 4V6H15V4H9Z"></path>
                                             </svg>

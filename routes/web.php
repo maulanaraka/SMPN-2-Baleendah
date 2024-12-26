@@ -12,6 +12,7 @@ use App\Http\Controllers\SiswaKelasController;
 use App\Http\Controllers\KehadiranController;
 use App\Http\Controllers\MataPelajaranSiswaController;
 use App\Http\Controllers\SiswaEkstrakurikulerController;
+use App\Http\Controllers\BeasiswaController;
 
 use App\Http\Controllers\EkstrakurikulerController;
 use App\Http\Controllers\KelasController;
@@ -166,7 +167,7 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
         });
     });
 
-    // nilai
+    // Nilai
     Route::prefix('siswa/{siswaID}')->name('siswa.')->group(function() {
         Route::get('nilai', [MataPelajaranSiswaController::class, 'index'])->name('nilai.index');
         Route::get('nilai/create', [MataPelajaranSiswaController::class, 'create'])->name('nilai.create');
@@ -185,6 +186,17 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
         Route::put('ekstrakurikuler/{siswaEkstrakurikulerID}', [SiswaEkstrakurikulerController::class, 'update'])->name('ekstrakurikuler.update');
         Route::delete('ekstrakurikuler/{siswaEkstrakurikulerID}', [SiswaEkstrakurikulerController::class, 'destroy'])->name('ekstrakurikuler.destroy');
     });    
+
+    // Beasiswa
+    Route::prefix('siswa/{SiswasiswaID}/beasiswa')->name('siswa.')->group(function () {
+        Route::get('/', [BeasiswaController::class, 'index'])->name('beasiswa.index');
+        Route::get('/create', [BeasiswaController::class, 'create'])->name('beasiswa.create');
+        Route::post('/', [BeasiswaController::class, 'store'])->name('beasiswa.store');
+        Route::get('/{beasiswaID}/edit', [BeasiswaController::class, 'edit'])->name('beasiswa.edit');
+        Route::put('/{beasiswaID}', [BeasiswaController::class, 'update'])->name('beasiswa.update');
+        Route::delete('/{beasiswaID}', [BeasiswaController::class, 'destroy'])->name('beasiswa.destroy');
+    });
+
 
 
 });

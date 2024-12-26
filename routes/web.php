@@ -11,6 +11,7 @@ use App\Http\Controllers\WaliController;
 use App\Http\Controllers\SiswaKelasController;
 use App\Http\Controllers\KehadiranController;
 use App\Http\Controllers\MataPelajaranSiswaController;
+use App\Http\Controllers\SiswaEkstrakurikulerController;
 
 use App\Http\Controllers\EkstrakurikulerController;
 use App\Http\Controllers\KelasController;
@@ -76,10 +77,39 @@ Route::middleware(['auth', 'role:operator'])->group(function () {
 Route::middleware(['auth', 'role:staff'])->group(function () {
     Route::get('/staff', [UserController::class, 'staff'])->name('staff');
 
+    // Data Sekolah
+    //================================================================================================================================================================
+    // Ekstrakurikuler
+    Route::get('/ekstrakurikuler', [EkstrakurikulerController::class, 'index'])->name('ekstrakurikuler.index');
+    Route::get('/ekstrakurikuler/create', [EkstrakurikulerController::class, 'create'])->name('ekstrakurikuler.create');
+    Route::post('/ekstrakurikuler', [EkstrakurikulerController::class, 'store'])->name('ekstrakurikuler.store');
+    Route::get('/ekstrakurikuler/{ekstrakurikulerID}/edit', [EkstrakurikulerController::class, 'edit'])->name('ekstrakurikuler.edit');
+    Route::put('/ekstrakurikuler/{ekstrakurikulerID}', [EkstrakurikulerController::class, 'update'])->name('ekstrakurikuler.update');
+    Route::delete('/ekstrakurikuler/{ekstrakurikulerID}', [EkstrakurikulerController::class, 'destroy'])->name('ekstrakurikuler.destroy');
+
+    // Kelas
+    Route::get('/kelas', [KelasController::class, 'index'])->name('kelas.index');
+    Route::get('/kelas/create', [KelasController::class, 'create'])->name('kelas.create');
+    Route::post('/kelas', [KelasController::class, 'store'])->name('kelas.store');
+    Route::get('/kelas/{kelasID}/edit', [KelasController::class, 'edit'])->name('kelas.edit');
+    Route::put('/kelas/{kelasID}', [KelasController::class, 'update'])->name('kelas.update');
+    Route::delete('/kelas/{kelasID}', [KelasController::class, 'destroy'])->name('kelas.destroy');
+
+    // Mata Pelajaran
+    Route::get('/mata-pelajaran', [MataPelajaranController::class, 'index'])->name('mata_pelajaran.index');
+    Route::get('/mata-pelajaran/create', [MataPelajaranController::class, 'create'])->name('mata_pelajaran.create');
+    Route::post('/mata-pelajaran', [MataPelajaranController::class, 'store'])->name('mata_pelajaran.store');
+    Route::get('/mata-pelajaran/{mataPelajaranID}/edit', [MataPelajaranController::class, 'edit'])->name('mata_pelajaran.edit');
+    Route::put('/mata-pelajaran/{mataPelajaranID}', [MataPelajaranController::class, 'update'])->name('mata_pelajaran.update');
+    Route::delete('/mata-pelajaran/{mataPelajaranID}', [MataPelajaranController::class, 'destroy'])->name('mata_pelajaran.destroy');
+
     //Backup
     Route::get('/backup-data', [SiswaController::class, 'showBackup'])->name('siswa.showBackup');
     Route::get('/download-backup', [SiswaController::class, 'downloadBackup'])->name('siswa.downloadBackup');
 
+
+    // Data Siswa
+    //================================================================================================================================================================
     // Siswa
     Route::get('/siswa/input', [SiswaController::class, 'create'])->name('siswa.input');
     Route::post('/siswa', [SiswaController::class, 'store'])->name('siswa.store');
@@ -136,6 +166,7 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
         });
     });
 
+    // nilai
     Route::prefix('siswa/{siswaID}')->name('siswa.')->group(function() {
         Route::get('nilai', [MataPelajaranSiswaController::class, 'index'])->name('nilai.index');
         Route::get('nilai/create', [MataPelajaranSiswaController::class, 'create'])->name('nilai.create');
@@ -144,6 +175,17 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
         Route::put('nilai/{mataPelajaranSiswaID}', [MataPelajaranSiswaController::class, 'update'])->name('nilai.update');
         Route::delete('nilai/{mataPelajaranSiswaID}', [MataPelajaranSiswaController::class, 'destroy'])->name('nilai.destroy');
     });
+
+    // Ekstrakurikuler
+    Route::prefix('siswa/{siswaID}')->name('siswa.')->group(function () {
+        Route::get('ekstrakurikuler', [SiswaEkstrakurikulerController::class, 'index'])->name('ekstrakurikuler.index');
+        Route::get('ekstrakurikuler/create', [SiswaEkstrakurikulerController::class, 'create'])->name('ekstrakurikuler.create');
+        Route::post('ekstrakurikuler', [SiswaEkstrakurikulerController::class, 'store'])->name('ekstrakurikuler.store');
+        Route::get('ekstrakurikuler/{siswaEkstrakurikulerID}/edit', [SiswaEkstrakurikulerController::class, 'edit'])->name('ekstrakurikuler.edit');
+        Route::put('ekstrakurikuler/{siswaEkstrakurikulerID}', [SiswaEkstrakurikulerController::class, 'update'])->name('ekstrakurikuler.update');
+        Route::delete('ekstrakurikuler/{siswaEkstrakurikulerID}', [SiswaEkstrakurikulerController::class, 'destroy'])->name('ekstrakurikuler.destroy');
+    });    
+
 
 });
 

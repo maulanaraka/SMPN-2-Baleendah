@@ -82,7 +82,7 @@
                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100">
                 Nilai Siswa
             </a>
-            <a href="#" 
+            <a href="{{ route('siswa.ekstrakurikuler.index', $siswa->siswaID) }}" 
                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100">
                 Ekstrakulikuler
             </a>

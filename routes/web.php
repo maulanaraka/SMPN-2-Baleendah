@@ -14,6 +14,7 @@ use App\Http\Controllers\MataPelajaranSiswaController;
 use App\Http\Controllers\PrestasiController;
 use App\Http\Controllers\SiswaEkstrakurikulerController;
 use App\Http\Controllers\BeasiswaController;
+use App\Http\Controllers\ChartController;
 
 use App\Http\Controllers\EkstrakurikulerController;
 use App\Http\Controllers\KelasController;
@@ -96,6 +97,8 @@ Route::middleware(['auth', 'role:operator'])->group(function () {
 // Staff
 Route::middleware(['auth', 'role:staff'])->group(function () {
     Route::get('/staff', [UserController::class, 'staff'])->name('staff');
+
+    Route::get('/class-stats', [ChartController::class, 'getClassStats']);
 
     // Data Sekolah
     //================================================================================================================================================================

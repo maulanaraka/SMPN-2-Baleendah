@@ -46,36 +46,46 @@
           </div>
     </div>
 
-     <!-- Chart.js Library -->
-     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-     <script>
-          const ctx = document.getElementById('classStats').getContext('2d');
-          const classStats = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                     labels: ['Kelas 7', 'Kelas 8', 'Kelas 9'],
-                     datasets: [
-                          {
+    <!-- Chart.js Library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        fetch('/class-stats')
+            .then(response => response.json())
+            .then(data => {
+                const ctx = document.getElementById('classStats').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: data.labels, // Class levels (e.g., Kelas 7, Kelas 8)
+                        datasets: [
+                            {
                                 label: 'Laki-laki',
-                                data: [200, 250, 117],
+                                data: data.male_counts,
                                 backgroundColor: 'rgba(59, 130, 246, 0.8)',
-                          },
-                          {
+                            },
+                            {
                                 label: 'Perempuan',
-                                data: [67, 83, 50],
+                                data: data.female_counts,
                                 backgroundColor: 'rgba(236, 72, 153, 0.8)',
-                          }
-                     ]
-                },
-                options: {
-                     responsive: true,
-                     plugins: {
-                          legend: {
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
                                 position: 'top',
-                          }
-                     }
-                }
-          });
-     </script>
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(error => console.error('Error fetching class stats:', error));
+    });
+</script>
+
+ 
 </div>
 @endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Siswa;
+use Dompdf\Dompdf;
 
 class SiswaController extends Controller
 {
@@ -62,6 +63,18 @@ class SiswaController extends Controller
     {
         $siswa = Siswa::findOrFail($siswaID);
         return view('siswa.detail-siswa', compact('siswa')); // Adjust view path
+    }
+
+    public function generatePDF($siswaID)
+    {
+        $siswa = Siswa::findOrFail($siswaID);
+
+        $html = view('siswa.pdf', compact('siswa'))->render();
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        return $dompdf->stream('Data_Siswa.pdf');
     }
 
     public function edit($siswaID)

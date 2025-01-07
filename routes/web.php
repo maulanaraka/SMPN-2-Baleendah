@@ -14,12 +14,18 @@ use App\Http\Controllers\MataPelajaranSiswaController;
 use App\Http\Controllers\PrestasiController;
 use App\Http\Controllers\SiswaEkstrakurikulerController;
 use App\Http\Controllers\BeasiswaController;
+use App\Http\Controllers\ChartController;
 
 use App\Http\Controllers\EkstrakurikulerController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MataPelajaranController;
 use App\Http\Controllers\EkstrakurikulerSiswaController;
 use App\Http\Controllers\IntelegensiController;
+
+use App\Http\Controllers\KelulusanController;
+use App\Http\Controllers\PendidikanSebelumnyaController;
+use App\Http\Controllers\PindahSekolahController;
+use App\Http\Controllers\CatatanSiswaController;
 
 use App\Http\Middleware\UserAccess;
 use Illuminate\Support\Facades\Route;
@@ -97,6 +103,8 @@ Route::middleware(['auth', 'role:operator'])->group(function () {
 Route::middleware(['auth', 'role:staff'])->group(function () {
     Route::get('/staff', [UserController::class, 'staff'])->name('staff');
 
+    Route::get('/class-stats', [ChartController::class, 'getClassStats']);
+
     // Data Sekolah
     //================================================================================================================================================================
     // Ekstrakurikuler
@@ -138,6 +146,7 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
     Route::delete('/siswa/{siswaID}', [SiswaController::class, 'destroy'])->name('siswa.destroy');
     Route::get('/data-siswa', [SiswaController::class, 'dataSiswa'])->name('data-siswa');
     Route::get('/siswa/{siswaID}/show', [SiswaController::class, 'show'])->name('siswa.show');
+    Route::get('/siswa/{siswaID}/pdf', [SiswaController::class, 'generatePDF'])->name('siswa.pdf');
 
     // Kesehatan
     Route::get('/kesehatan/input', [KesehatanController::class, 'create'])->name('kesehatan.input');
@@ -194,7 +203,6 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
         Route::put('nilai/{mataPelajaranSiswaID}', [MataPelajaranSiswaController::class, 'update'])->name('nilai.update');
         Route::delete('nilai/{mataPelajaranSiswaID}', [MataPelajaranSiswaController::class, 'destroy'])->name('nilai.destroy');
     });
-
     
     // Ekstrakurikuler
     Route::prefix('siswa/{siswaID}/ekstrakurikuler')->name('siswa.ekstrakurikuler.')->group(function () {
@@ -216,18 +224,31 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
         Route::delete('/{intelegensiID}', [IntelegensiController::class, 'destroy'])->name('destroy');
     });
 
-    // Beasiswa
-    Route::prefix('siswa/{SiswasiswaID}/beasiswa')->name('siswa.')->group(function () {
-        Route::get('/', [BeasiswaController::class, 'index'])->name('beasiswa.index');
-        Route::get('/create', [BeasiswaController::class, 'create'])->name('beasiswa.create');
-        Route::post('/', [BeasiswaController::class, 'store'])->name('beasiswa.store');
-        Route::get('/{beasiswaID}/edit', [BeasiswaController::class, 'edit'])->name('beasiswa.edit');
-        Route::put('/{beasiswaID}', [BeasiswaController::class, 'update'])->name('beasiswa.update');
-        Route::delete('/{beasiswaID}', [BeasiswaController::class, 'destroy'])->name('beasiswa.destroy');
+    // Kelulusan
+    Route::prefix('siswa/{siswaID}/kelulusan')->name('siswa.kelulusan.')->group(function () {
+        Route::get('/create', [KelulusanController::class, 'create'])->name('create');
+        Route::post('/', [KelulusanController::class, 'store'])->name('store');
+        Route::get('/{lulusID}/edit', [KelulusanController::class, 'edit'])->name('edit');
+        Route::put('/{lulusID}', [KelulusanController::class, 'update'])->name('update');
     });
 
+    // Pendidiakan Sebelumnya
+    Route::prefix('siswa/{siswaID}/pendidikan_sebelumnya')->name('siswa.pendidikan_sebelumnya.')->group(function () {
+        Route::get('/create', [PendidikanSebelumnyaController::class, 'create'])->name('create');
+        Route::post('/', [PendidikanSebelumnyaController::class, 'store'])->name('store');
+    });
 
+    // Pindah Sekolah
+    Route::prefix('siswa/{siswaID}/pindah_sekolah')->name('siswa.pindah_sekolah.')->group(function () {
+        Route::get('/create', [PindahSekolahController::class, 'create'])->name('create');
+        Route::post('/', [PindahSekolahController::class, 'store'])->name('store');
+    });
 
+    // Catatan Siswa
+    Route::prefix('siswa/{siswaID}/catatan_siswa')->name('siswa.catatan_siswa.')->group(function () {
+        Route::get('/create', [CatatanSiswaController::class, 'create'])->name('create');
+        Route::post('/', [CatatanSiswaController::class, 'store'])->name('store');
+    });
 });
 
 

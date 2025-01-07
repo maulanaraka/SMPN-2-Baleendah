@@ -2,8 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CatatanSiswa;
+use App\Models\Intelegensi;
+use App\Models\Kehadiran;
+use App\Models\OrangTua;
 use Illuminate\Http\Request;
 use App\Models\Siswa;
+use App\Models\Kesehatan;
+use App\Models\PendidikanSebelumnya;
+use App\Models\TempatTinggal;
+use App\Models\Pendidikan;
+use App\Models\Wali;
 use Dompdf\Dompdf;
 
 class SiswaController extends Controller
@@ -62,7 +71,15 @@ class SiswaController extends Controller
     public function show($siswaID)
     {
         $siswa = Siswa::findOrFail($siswaID);
-        return view('siswa.detail-siswa', compact('siswa')); // Adjust view path
+        $tinggal = TempatTinggal::where('SiswasiswaID', $siswaID)->first();
+        $kesehatan = Kesehatan::where('SiswasiswaID', $siswaID)->first();
+        $pendidikan = PendidikanSebelumnya::where('SiswasiswaID', $siswaID)->first();
+        $ortu = OrangTua::where('SiswasiswaID', $siswaID)->first();
+        $wali = Wali::where('SiswasiswaID', $siswaID)->first();
+        $intelegensi = Intelegensi::where('SiswasiswaID', $siswaID)->first();
+        $kehadiran = Kehadiran::where('SiswasiswaID', $siswaID)->first();
+        $catatan = CatatanSiswa::where('SiswasiswaID', $siswaID)->first();
+        return view('siswa.detail-siswa', compact('siswa', 'tinggal', 'kesehatan', 'pendidikan', 'ortu', 'wali', 'intelegensi', 'kehadiran', 'catatan' )); // Adjust view path
     }
 
     public function generatePDF($siswaID)

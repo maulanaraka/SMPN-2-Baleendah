@@ -90,10 +90,10 @@
                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100">
                 Prestasi
             </a>
-            <a href="{{ route('siswa.beasiswa.index', $siswa->siswaID) }}" 
+            {{-- <a href="{{ route('siswa.beasiswa.index', $siswa->siswaID) }}" 
                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100">
                 Beasiswa
-            </a>
+            </a> --}}
             <a href="{{ route('siswa.intelegensi.index', $siswa->siswaID) }}" 
                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100">
                 Intelegensi dan Kepribadian

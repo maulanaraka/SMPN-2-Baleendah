@@ -53,11 +53,11 @@
                 </tr>
                 <tr>
                     <td class="border px-2 py-1">Alamat</td>
-                    <td class="border px-2 py-1" colspan="3">{{ $siswa->alamat }}</td>
+                    <td class="border px-2 py-1" colspan="3">{{ $tinggal->jalan }}</td>
                 </tr>
                 <tr>
                     <td class="border px-2 py-1">No. Telepon</td>
-                    <td class="border px-2 py-1" colspan="3">{{ $siswa->noTelepon }}</td>
+                    <td class="border px-2 py-1" colspan="3">{{ $tinggal->noTelepon }}</td>
                 </tr>
 
                 <tr>
@@ -65,13 +65,13 @@
                 </tr>
                 <tr>
                     <td class="border px-2 py-1">Berat Badan</td>
-                    <td class="border px-2 py-1">{{ $siswa->beratBadan }} kg</td>
+                    <td class="border px-2 py-1">{{ $kesehatan->beratDiterima }} kg</td>
                     <td class="border px-2 py-1">Tinggi Badan</td>
-                    <td class="border px-2 py-1">{{ $siswa->tinggiBadan }} cm</td>
+                    <td class="border px-2 py-1">{{ $kesehatan->tinggiDiterima }} cm</td>
                 </tr>
                 <tr>
                     <td class="border px-2 py-1">Golongan Darah</td>
-                    <td class="border px-2 py-1" colspan="3">{{ $siswa->golonganDarah }}</td>
+                    <td class="border px-2 py-1" colspan="3">{{ $kesehatan->golDarah }}</td>
                 </tr>
 
                 <tr>
@@ -79,15 +79,15 @@
                 </tr>
                 <tr>
                     <td class="border px-2 py-1">Asal Sekolah</td>
-                    <td class="border px-2 py-1" colspan="3">{{ $siswa->asalSekolah }}</td>
+                    <td class="border px-2 py-1" colspan="3">{{ $pendidikan->namaSD }}</td>
                 </tr>
                 <tr>
                     <td class="border px-2 py-1">Alamat Sekolah</td>
-                    <td class="border px-2 py-1" colspan="3">{{ $siswa->alamatSekolah }}</td>
+                    <td class="border px-2 py-1" colspan="3">{{ $pendidikan->alamatSekolah }}</td>
                 </tr>
                 <tr>
                     <td class="border px-2 py-1">Nomor Ijazah</td>
-                    <td class="border px-2 py-1" colspan="3">{{ $siswa->nomorIjazah }}</td>
+                    <td class="border px-2 py-1" colspan="3">{{ $pendidikan->noIjazah }}</td>
                 </tr>
 
                 <tr>
@@ -95,28 +95,28 @@
                 </tr>
                 <tr>
                     <td class="border px-2 py-1">Nama Ayah</td>
-                    <td class="border px-2 py-1">{{ $siswa->namaAyah }}</td>
+                    <td class="border px-2 py-1">{{ $ortu->namaAyah }}</td>
                     <td class="border px-2 py-1">Nama Ibu</td>
-                    <td class="border px-2 py-1">{{ $siswa->namaIbu }}</td>
+                    <td class="border px-2 py-1">{{ $ortu->namaIbu }}</td>
                 </tr>
                 <tr>
                     <td class="border px-2 py-1">Pekerjaan Ayah</td>
-                    <td class="border px-2 py-1">{{ $siswa->pekerjaanAyah }}</td>
+                    <td class="border px-2 py-1">{{ $ortu->pekerjaanAyah }}</td>
                     <td class="border px-2 py-1">Pekerjaan Ibu</td>
-                    <td class="border px-2 py-1">{{ $siswa->pekerjaanIbu }}</td>
+                    <td class="border px-2 py-1">{{ $ortu->pekerjaanIbu }}</td>
                 </tr>
                 <tr>
                     <th colspan="4" class="text-left py-2">F. Keterangan Wali</th>
                 </tr>
                 <tr>
                     <td class="border px-2 py-1">Nama Wali</td>
-                    <td class="border px-2 py-1">{{ $siswa->namaWali }}</td>
+                    <td class="border px-2 py-1">{{ $wali->namaWali }}</td>
                     <td class="border px-2 py-1">Pekerjaan Wali</td>
-                    <td class="border px-2 py-1">{{ $siswa->pekerjaanWali }}</td>
+                    <td class="border px-2 py-1">{{ $wali->pekerjaanWali }}</td>
                 </tr>
                 <tr>
                     <td class="border px-2 py-1">Alamat Wali</td>
-                    <td class="border px-2 py-1" colspan="3">{{ $siswa->alamatWali }}</td>
+                    <td class="border px-2 py-1" colspan="3">{{ $wali->alamatWali }}</td>
                 </tr>
 
                 <tr>
@@ -124,32 +124,32 @@
                 </tr>
                 <tr>
                     <td class="border px-2 py-1">Intelegensi (IQ)</td>
-                    <td class="border px-2 py-1" colspan="3">{{ $siswa->iq }}</td>
+                    <td class="border px-2 py-1" colspan="3">{{ $intelegensi->intelegensiIQ }}</td>
                 </tr>
                 <tr>
                     <td class="border px-2 py-1">Kepribadian</td>
                     <td class="border px-2 py-1" colspan="3">
                         <ul>
-                            <li>Disiplin: {{ $siswa->disiplin }}</li>
-                            <li>Kreativitas: {{ $siswa->kreativitas }}</li>
-                            <li>Tanggung Jawab: {{ $siswa->tanggungJawab }}</li>
-                            <li>Kerjasama: {{ $siswa->kerjasama }}</li>
+                            <li>Disiplin: {{ $intelegensi->disiplin }}</li>
+                            <li>Kreativitas: {{ $intelegensi->kreativitas }}</li>
+                            <li>Tanggung Jawab: {{ $intelegensi->tanggungJawab }}</li>
+                            <li>Kerjasama: {{ $intelegensi->kerjasama }}</li>
                         </ul>
                     </td>
                 </tr>
-                <tr>
+                {{-- <tr>
                     <td class="border px-2 py-1">Prestasi</td>
                     <td class="border px-2 py-1" colspan="3">{{ $siswa->prestasi }}</td>
-                </tr>
+                </tr> --}}
 
                 <tr>
                     <th colspan="4" class="text-left py-2">H. Keterangan Kehadiran</th>
                 </tr>
                 <tr>
                     <td class="border px-2 py-1">Semester 1</td>
-                    <td class="border px-2 py-1">Hadir: {{ $siswa->hadir1 }}</td>
-                    <td class="border px-2 py-1">Sakit: {{ $siswa->sakit1 }}</td>
-                    <td class="border px-2 py-1">Izin: {{ $siswa->izin1 }}</td>
+                    <td class="border px-2 py-1">Hadir: {{ $kehadiran->jumlahHadir }}</td>
+                    <td class="border px-2 py-1">Sakit: {{ $kehadiran->sakit }}</td>
+                    <td class="border px-2 py-1">Izin: {{ $kehadiran->izin }}</td>
                 </tr>
                 <tr>
                     <td class="border px-2 py-1">Semester 2</td>
@@ -162,7 +162,7 @@
                     <th colspan="4" class="text-left py-2">I. Catatan Lain-lain</th>
                 </tr>
                 <tr>
-                    <td class="border px-2 py-1" colspan="4">{{ $siswa->catatanLain }}</td>
+                    <td class="border px-2 py-1" colspan="4">{{ $catatan->catatanPenting }}</td>
                 </tr>
             </table>
         </div>

@@ -43,6 +43,7 @@
                         <th class="py-3 px-4 border-b text-center">Deskripsi</th>
                         <th class="py-3 px-4 border-b text-center">KKM Pengetahuan</th>
                         <th class="py-3 px-4 border-b text-center">KKM Keterampilan</th>
+                        <th class="py-3 px-4 border-b text-center">Tingkat</th>
                         <th class="py-3 px-4 border-b text-center">Actions</th>
                     </tr>
                 </thead>
@@ -54,6 +55,7 @@
                             <td class="py-3 px-4 border-b text-center">{{ $mataPelajaran->deskripsiMataPelajaran }}</td>
                             <td class="py-3 px-4 border-b text-center">{{ $mataPelajaran->KKMPengetahuan }}</td>
                             <td class="py-3 px-4 border-b text-center">{{ $mataPelajaran->KKMKeterampilan }}</td>
+                            <td class="py-3 px-4 border-b text-center">{{ $mataPelajaran->tingkat }}</td>
                             <td class="py-3 px-4 border-b text-center">
                                 <div class="flex justify-center space-x-2">
                                     <a href="{{ route('mata_pelajaran.edit', $mataPelajaran->mataPelajaranID) }}" class="bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg p-2" title="Edit">

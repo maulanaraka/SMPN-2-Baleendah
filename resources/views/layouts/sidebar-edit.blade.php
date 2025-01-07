@@ -119,19 +119,19 @@
             id="informasiTambahan" 
             class="transition-all duration-300 ease-in-out overflow-hidden max-h-0 bg-white rounded-md shadow-lg border border-gray-200"
             >
-            <a href="#" 
+            <a href="{{ route('siswa.kelulusan.create', $siswa->siswaID) }}" 
             class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100">
             Kelulusan
             </a>
-            <a href="#" 
+            <a href="{{ route('siswa.pendidikan_sebelumnya.create', $siswa->siswaID) }}" 
             class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100">
             Pendidikan Sebelumnya
             </a>
-            <a href="#" 
+            <a href="{{ route('siswa.pindah_sekolah.create', $siswa->siswaID) }}" 
             class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100">
             Pindah Sekolah
             </a>
-            <a href="#" 
+            <a href="{{ route('siswa.catatan_siswa.create', $siswa->siswaID) }}" 
             class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100">
             Catatan Siswa
             </a>

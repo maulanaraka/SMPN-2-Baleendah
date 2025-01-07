@@ -40,7 +40,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 <div>
                     <label for="kelas" class="block mb-2 text-sm font-medium text-gray-900">Kelas</label>
-                    <input type="text" name="kelas" id="kelas" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="{{ $kelas->kelas }}" required>
+                    <input type="text" name="kelas" id="kelas" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="{{ $kelas->kelasID }}" required>
                 </div>
 
                 <div>

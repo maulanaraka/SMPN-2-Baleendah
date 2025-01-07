@@ -47,8 +47,12 @@
 
     <section class="h-screen bg-gradient-to-b from-green-600 to-gray-200 flex flex-col items-center justify-center">
         <h2 class="text-4xl md:text-5xl font-regular text-white mb-6">Tujuan <span class="text-4xl md:text-5xl font-bold text-white">Website</span> ini dibuat</h2>
-        <div class="w-4/5 md:w-2/3 bg-gray-200 rounded-lg h-64 mb-4"></div>
-        <p class="text-center text-gray-700 text-lg md:text-xl max-w-2xl">Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</p>
+        <div class="w-4/5 md:w-2/3 bg-gray-200 rounded-lg h-auto mb-4">
+            <img src="{{ asset('img/Gambar Landing.png') }}" alt="Gambar Landing" class="rounded-lg w-full h-full object-cover">
+        </div>
+        <p class="text-center text-gray-700 text-lg md:text-xl max-w-2xl">Mencari data siswa hanya dalam sekejap mata</p>
+        <p class="text-center text-gray-700 text-lg md:text-xl max-w-2xl">Input dan simpan data menjadi lebih cepat</p>
+        <p class="text-center text-gray-700 text-lg md:text-xl max-w-2xl">Menghindari human error pada saat pengerjaan</p>
     </section>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.js"></script>
